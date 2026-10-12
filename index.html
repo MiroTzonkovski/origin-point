@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Origin Point | 1-1 coaching with Miro Tzonkovski</title>
+<meta name="description" content="You changed the job, the city, the people, and the same result found you again. Read this before your call.">
+
+<!-- Link preview (Instagram DMs, WhatsApp, iMessage). Replace the domain once the site is live. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Origin Point">
+<meta property="og:description" content="Read this before your call. It takes about five minutes.">
+<meta property="og:image" content="https://YOUR-DOMAIN.vercel.app/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#263B30">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #F2F4F0;
+    --ink: #22322A;
+    --ink-soft: #4A5C52;
+    --sage: #3F5D4E;
+    --sage-deep: #263B30;
+    --mist: #DCE6DE;
+    --mist-dim: #A9BDB0;
+    --clay: #B8714B;
+    --clay-strong: #9C5A37;
+    --clay-light: #E4A37E;
+    --error: #9B2C2C;
+
+    --serif: Cambria, Caladea, Georgia, serif;
+    --sans: Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
+
+    --measure: 36rem;
+    --gutter: clamp(16px, 5vw, 48px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; margin: 0; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--clay); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: calc(var(--measure) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--sage-deep);
+    color: var(--mist);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero .wrap { flex: 1; display: flex; flex-direction: column; width: 100%; }
+  .brand {
+    padding-top: 28px;
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    color: var(--mist);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand svg { flex: none; }
+  .hero-body { margin: auto 0; padding: 7vh 0 9vh; }
+  @media (min-width: 760px) { .hero-body { padding: 12vh 0 10vh; } }
+  .hook {
+    font-size: clamp(2.25rem, 7.2vw, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: #F2F4F0;
+  }
+  .hook span { display: block; }
+  .hook .turn { color: var(--clay-light); margin-top: 0.35em; }
+  .hero-lede { margin-top: 1.75rem; font-size: 1.25rem; max-width: 30rem; color: var(--mist); }
+  .hero-note { font-size: 1rem; color: var(--mist-dim); max-width: 28rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 2rem; }
+  .skip { font-size: 1rem; color: var(--mist-dim); text-underline-offset: 4px; }
+  .skip:hover { color: var(--mist); }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1;
+    padding: 17px 26px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--clay-strong);
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn:hover { background: #8A4E2F; }
+  .btn[disabled] { opacity: .65; cursor: progress; }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(72px, 12vw, 128px) 0; }
+  section + section { border-top: 1px solid var(--mist); }
+  .section-title { font-size: clamp(1.875rem, 5vw, 2.5rem); margin-bottom: 1.25rem; }
+  .prose p { color: var(--ink); }
+  .soft { color: var(--ink-soft); }
+
+  /* ---------- The chain ---------- */
+  .chain { margin: 2.5rem 0 3rem; position: relative; }
+  .chain-list { list-style: none; margin: 0; padding: 0; }
+  .chain::before {
+    content: "";
+    position: absolute;
+    left: 31px; top: 36px; bottom: 36px;
+    width: 2px;
+    background: var(--mist);
+  }
+  .chain-track {
+    position: absolute;
+    left: 31px; top: 36px;
+    width: 2px;
+    height: calc(100% - 72px);
+    background: linear-gradient(var(--clay), var(--sage));
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+  .js .chain-track { transform: scaleY(0); transition: transform 1.6s cubic-bezier(.3,.6,.2,1); }
+  .js .chain.is-drawn .chain-track { transform: scaleY(1); }
+  @media (prefers-reduced-motion: reduce) {
+    .js .chain-track { transition: none; transform: scaleY(1); }
+  }
+
+  .link { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 14px 0; position: relative; }
+  .letter {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--serif);
+    font-size: 2rem;
+    background: var(--paper);
+    border: 2px solid var(--sage);
+    color: var(--sage);
+    position: relative;
+    z-index: 1;
+  }
+  .link.origin .letter { background: var(--clay); border-color: var(--clay); color: #fff; }
+  .link h3 { font-size: 1.5rem; margin-top: 4px; }
+  .link p { margin: 4px 0 0; color: var(--ink-soft); }
+  .origin-tag {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: var(--sans);
+    font-size: .875rem;
+    font-weight: 700;
+    color: var(--clay-strong);
+    vertical-align: middle;
+  }
+
+  .outfit {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    line-height: 1.2;
+    color: var(--sage);
+    margin: 2.5rem 0 1.5rem;
+    padding-left: 20px;
+    border-left: 3px solid var(--clay);
+  }
+
+  /* ---------- Story ---------- */
+  .story-grid { display: grid; gap: 28px; }
+  .portrait { margin: 0 0 8px; }
+  .portrait img {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 4px;
+    background: var(--mist);
+  }
+  .story .contrast { font-family: var(--serif); font-size: 1.375rem; line-height: 1.4; color: var(--sage); }
+
+  /* ---------- Phases ---------- */
+  .filter-line { font-family: var(--serif); font-size: 1.375rem; line-height: 1.4; color: var(--sage); margin: 2rem 0; }
+  .phases { list-style: none; margin: 2.5rem 0 0; padding: 0; display: grid; gap: 28px; }
+  .phase { display: grid; grid-template-columns: 44px 1fr; gap: 16px; }
+  .phase-num {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--mist);
+    color: var(--sage-deep);
+    display: grid; place-items: center;
+  }
+  .phase h3 { font-size: 1.375rem; margin-top: 6px; margin-bottom: 6px; }
+  .phase p { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- Fit ---------- */
+  .fit { display: grid; gap: 36px; margin-top: 2rem; }
+  .fit h3 { font-size: 1.375rem; margin-bottom: 12px; }
+  .fit ul { list-style: none; margin: 0; padding: 0; }
+  .fit li { padding: 10px 0 10px 30px; position: relative; border-top: 1px solid var(--mist); }
+  .fit li:last-child { border-bottom: 1px solid var(--mist); }
+  .fit li::before {
+    content: "";
+    position: absolute; left: 4px; top: 21px;
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .fit .yes li::before { background: var(--sage); }
+  .fit .no li::before { background: transparent; border: 2px solid var(--clay); }
+
+  .index-explainer {
+    margin-top: 3rem;
+    padding: 28px;
+    background: var(--sage-deep);
+    color: var(--mist);
+    border-radius: 6px;
+  }
+  .index-explainer h3 { color: #F2F4F0; font-size: 1.5rem; margin-bottom: 10px; }
+  .formula {
+    font-family: var(--serif);
+    font-size: clamp(1.125rem, 4vw, 1.375rem);
+    color: var(--clay-light);
+    margin: 14px 0;
+  }
+  .index-explainer p { color: var(--mist); }
+  .index-explainer .formula { color: var(--clay-light); }
+  .index-explainer p:last-child { margin-bottom: 0; }
+
+  /* ---------- Application ---------- */
+  .apply { background: #FFFFFF; }
+  section.apply + section, section + section.apply { border-top-color: var(--mist); }
+  form { margin-top: 2rem; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  legend { padding: 0; }
+  .group { margin-bottom: 3rem; }
+  .group:last-of-type { margin-bottom: 1.25rem; }
+  .group-title { font-family: var(--serif); font-size: 1.5rem; color: var(--sage); margin-bottom: 1rem; }
+  .field { margin-bottom: 1.75rem; }
+  .field > label, .field > .label, legend.label {
+    display: block;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    padding: 0;
+  }
+  .hint { display: block; font-size: .975rem; color: var(--ink-soft); margin-bottom: 10px; }
+  .optional { font-weight: 400; color: var(--ink-soft); }
+
+  input[type=text], input[type=email], textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1.0625rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid #C5D1C8;
+    border-radius: 6px;
+    padding: 13px 14px;
+  }
+  textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+  input[type=text]:focus, input[type=email]:focus, textarea:focus {
+    outline: none; border-color: var(--sage); background: #fff;
+    box-shadow: 0 0 0 3px rgba(63, 93, 78, .18);
+  }
+  .field.invalid input, .field.invalid textarea { border-color: var(--error); }
+  .error-text { display: none; color: var(--error); font-size: .95rem; margin-top: 6px; }
+  .field.invalid .error-text { display: block; }
+
+  .choices { display: grid; gap: 8px; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .choice > span {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    border: 1.5px solid #C5D1C8;
+    border-radius: 6px;
+    background: var(--paper);
+    line-height: 1.35;
+  }
+  .choice > span::before {
+    content: ""; flex: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--sage);
+    background: #fff;
+  }
+  .choice input[type=checkbox] + span::before { border-radius: 4px; }
+  .choice input:checked + span { border-color: var(--sage); background: var(--mist); }
+  .choice input:checked + span::before { background: var(--sage); box-shadow: inset 0 0 0 3px #fff; }
+  .choice input:focus-visible + span { outline: 3px solid var(--clay); outline-offset: 2px; }
+  .choice b { font-family: var(--serif); font-weight: 400; color: var(--sage); font-size: 1.125rem; width: 1ch; flex: none; }
+
+  /* Sliders */
+  .rate { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px 18px; }
+  .rate output {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    min-width: 2.2ch;
+    text-align: right;
+    color: var(--sage);
+  }
+  .rate output.unset { color: var(--mist-dim); }
+  .scale-ends { grid-column: 1; display: flex; justify-content: space-between; font-size: .875rem; color: var(--ink-soft); margin-top: -8px; }
+
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 36px; background: transparent; margin: 0;
+  }
+  input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--mist); }
+  input[type=range]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--mist); }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 28px; height: 28px; margin-top: -11px;
+    border-radius: 50%; background: var(--sage); border: 3px solid #fff;
+    box-shadow: 0 1px 4px rgba(38, 59, 48, .35);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--sage); border: 3px solid #fff;
+    box-shadow: 0 1px 4px rgba(38, 59, 48, .35);
+  }
+  input[type=range].unset::-webkit-slider-thumb { background: var(--mist-dim); }
+  input[type=range].unset::-moz-range-thumb { background: var(--mist-dim); }
+  input[type=range]:focus-visible { outline: none; }
+  input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(184, 113, 75, .45); }
+  input[type=range]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px rgba(184, 113, 75, .45); }
+
+  .index-result {
+    margin-top: .5rem;
+    padding: 20px 22px;
+    border-radius: 6px;
+    background: var(--sage-deep);
+    color: var(--mist);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .index-result .eq { font-size: 1rem; color: var(--mist-dim); }
+  .index-result .total { font-family: var(--serif); font-size: 2.25rem; line-height: 1; color: #F2F4F0; }
+  .index-result .total small { font-size: 1rem; color: var(--mist-dim); font-family: var(--sans); }
+
+  .bot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .form-status { margin-top: 1rem; font-size: 1rem; }
+  .form-status.error { color: var(--error); }
+
+  .sent { display: none; padding: 32px 0 8px; }
+  .sent h3 { font-size: 2rem; color: var(--sage); margin-bottom: 12px; }
+  .sent:focus { outline: none; }
+  .is-sent form { display: none; }
+  .is-sent .sent { display: block; }
+  .is-sent .apply-intro { display: none; }
+  .is-sent .section-title { display: none; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--sage-deep);
+    color: var(--mist-dim);
+    font-size: .975rem;
+    padding: 40px 0 48px;
+  }
+  footer p { margin: 0 0 4px; }
+  footer .name { font-family: var(--serif); color: var(--mist); font-size: 1.125rem; }
+  footer a { color: var(--mist); text-underline-offset: 3px; }
+
+  @media (min-width: 760px) {
+    .story-grid { grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
+    .portrait img { max-width: 220px; }
+    .fit { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .story .wrap, .apply .wrap { max-width: calc(44rem + 2 * var(--gutter)); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9.5" fill="none" stroke="#A9BDB0" stroke-width="1.5"/><circle cx="11" cy="11" r="3.5" fill="#B8714B"/></svg>
+      The Origin Point
+    </div>
+
+    <div class="hero-body">
+      <h1 class="hook">
+        <span>You changed the job.</span>
+        <span>The city. The people.</span>
+        <span class="turn">And the same result found you again.</span>
+      </h1>
+      <p class="hero-lede">That isn't bad luck. It's a chain, and it starts further back than you've looked.</p>
+      <p class="hero-note">Read this before your call with me, Miro. It takes about five minutes, and by the end you'll know whether The Origin Point is for you.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#chain">Start reading</a>
+        <a class="skip" href="#apply">Already read it? Go to the application</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="chain">
+    <div class="wrap prose">
+      <h2 class="section-title">Every result is the end of a chain.</h2>
+      <p>What you get in life doesn't come out of nowhere. It comes from what you do, which comes from how you feel, which comes from what got wired into you long before you had a say in it.</p>
+
+      <div class="chain">
+        <span class="chain-track" aria-hidden="true"></span>
+        <ol class="chain-list" aria-label="The chain, from where it starts to where it ends">
+        <li class="link origin">
+          <div class="letter" aria-hidden="true">C</div>
+          <div>
+            <h3>Conditioning <span class="origin-tag">Your origin point</span></h3>
+            <p>What got wired in before you could choose: your beliefs, your emotions, what you learned you're worth.</p>
+          </div>
+        </li>
+        <li class="link">
+          <div class="letter" aria-hidden="true">S</div>
+          <div>
+            <h3>State</h3>
+            <p>How you feel in the moment. Set by that wiring, not by what's actually happening.</p>
+          </div>
+        </li>
+        <li class="link">
+          <div class="letter" aria-hidden="true">B</div>
+          <div>
+            <h3>Behavior</h3>
+            <p>What you do from that state.</p>
+          </div>
+        </li>
+        <li class="link">
+          <div class="letter" aria-hidden="true">R</div>
+          <div>
+            <h3>Result</h3>
+            <p>What you get. Every time.</p>
+          </div>
+        </li>
+        </ol>
+      </div>
+
+      <p>Most people start at the bottom. They fix the behavior: new habits, new routines, a new plan, a new city.</p>
+      <p class="outfit">That's the same person in a different outfit.</p>
+      <p>The result doesn't change until you change where the chain starts.</p>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="wrap">
+      <h2 class="section-title">Where I found mine</h2>
+      <div class="story-grid">
+        <figure class="portrait" id="portrait">
+          <img src="images/miro.jpg" alt="Miro Tzonkovski" width="440" height="550" loading="lazy" onerror="document.getElementById('portrait').remove()">
+        </figure>
+        <div class="prose">
+          <p>From the outside, everything was working. My results kept growing. I was doing the right things.</p>
+          <p>How I felt didn't follow. Some days I felt unstoppable. Other days I felt like I wasn't worth a penny.</p>
+          <p class="contrast">Same person. Same results. Same plan.</p>
+          <p>So my state wasn't coming from my results. It was coming from further back: beliefs I'd picked up, emotions I'd never looked at, a sense of my own worth that was wired in long before any of it.</p>
+          <p>That's the start of the chain. It's where I went, and it's where The Origin Point starts with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="wrap prose">
+      <h2 class="section-title">What The Origin Point is</h2>
+      <p>1-1 coaching that starts at the root, not the result. Not new habits. Not motivation. You find the question your whole life has been answering, and you rewrite it.</p>
+      <p class="filter-line">You can't see the filter you're looking through. That's why doing this alone stalls.</p>
+      <p>That's what working 1-1 is for. It happens in two parts.</p>
+
+      <ol class="phases">
+        <li class="phase">
+          <div class="phase-num" aria-hidden="true">1</div>
+          <div>
+            <h3>The preparation</h3>
+            <p>You learn how your mind builds what you experience: your model of the world, cause and effect, why perception is projection. This is what makes everything after it hold.</p>
+          </div>
+        </li>
+        <li class="phase">
+          <div class="phase-num" aria-hidden="true">2</div>
+          <div>
+            <h3>The intervention</h3>
+            <p>You go to the start of your chain, beginning with your drive: the question running underneath every decision you make. You find the old one, see what it has cost you, and design a new one.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="fit">
+    <div class="wrap prose">
+      <h2 class="section-title">It's not for everyone.</h2>
+      <p>This only works for a certain kind of person. Read both lists honestly.</p>
+
+      <div class="fit">
+        <div class="yes">
+          <h3>This is for you if</h3>
+          <ul>
+            <li>your results are growing, but how you feel isn't keeping up</li>
+            <li>you've changed what's around you and ended up in the same place</li>
+            <li>you want the truth more than you want to feel good about it</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h3>This isn't for you if</h3>
+          <ul>
+            <li>you want to hear what you want to hear</li>
+            <li>you're looking for motivation, not change</li>
+            <li>you're not coachable</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="index-explainer">
+        <h3>Coachable has a number.</h3>
+        <p>It's called your Teachability Index. You rate two things from 0 to 10 and multiply them.</p>
+        <p class="formula">Willingness to learn × willingness to change</p>
+        <p>A 10 and a 3 only gives you 30. Both have to be high for anything here to work. You'll rate yourself in the application, and the number only helps you if it's honest.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="apply" id="apply">
+    <div class="wrap">
+      <h2 class="section-title">Apply for a call</h2>
+      <div class="apply-intro">
+        <p>I read every application myself. If it's a fit, I'll message you on Instagram to set up your call.</p>
+        <p class="soft">Take your time with it. Short, honest answers beat long, polished ones.</p>
+      </div>
+
+      <form id="application" novalidate>
+        <fieldset class="group">
+          <legend class="group-title">About you</legend>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <div class="error-text">Add your name.</div>
+          </div>
+          <div class="field">
+            <label for="instagram">Your Instagram handle</label>
+            <span class="hint" id="instagram-hint">This is where I'll message you.</span>
+            <input type="text" id="instagram" name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@yourhandle" aria-describedby="instagram-hint" required>
+            <div class="error-text">Add your Instagram handle so I can reach you.</div>
+          </div>
+          <div class="field">
+            <label for="email">Your email <span class="optional">(optional)</span></label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <div class="error-text">That email doesn't look right. Check it or leave it empty.</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group-title">Where you are</legend>
+          <div class="field">
+            <label for="now">Where are you right now?</label>
+            <span class="hint" id="now-hint">Your work, your results, what's going well.</span>
+            <textarea id="now" name="now" aria-describedby="now-hint" required></textarea>
+            <div class="error-text">Answer this one so I know where you're starting from.</div>
+          </div>
+          <div class="field">
+            <label for="changed">What have you already changed that didn't change how you feel?</label>
+            <span class="hint" id="changed-hint">A job, a place, people, habits, programs you've tried.</span>
+            <textarea id="changed" name="changed" aria-describedby="changed-hint" required></textarea>
+            <div class="error-text">Answer this one. It's the most useful thing you'll tell me.</div>
+          </div>
+          <fieldset class="field" id="link-field">
+            <legend class="label">Which link of the chain feels like where you're stuck?</legend>
+            <span class="hint">Go with your first instinct.</span>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="link" value="Conditioning" required><span><b>C</b><span>Conditioning: what I believe about myself</span></span></label>
+              <label class="choice"><input type="radio" name="link" value="State"><span><b>S</b><span>State: how I feel day to day</span></span></label>
+              <label class="choice"><input type="radio" name="link" value="Behavior"><span><b>B</b><span>Behavior: what I do, or don't do</span></span></label>
+              <label class="choice"><input type="radio" name="link" value="Result"><span><b>R</b><span>Result: what I'm getting</span></span></label>
+              <label class="choice"><input type="radio" name="link" value="Not sure"><span>I'm not sure yet</span></label>
+            </div>
+            <div class="error-text">Pick one, even if you're not sure.</div>
+          </fieldset>
+          <div class="field">
+            <label for="link-why">Why that one? <span class="optional">(optional)</span></label>
+            <textarea id="link-why" name="link_why" style="min-height:90px"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group-title">Where you want to go</legend>
+          <div class="field">
+            <label for="want">If this works, what's different six months from now?</label>
+            <textarea id="want" name="want" required></textarea>
+            <div class="error-text">Answer this one so I know what you're after.</div>
+          </div>
+          <div class="field">
+            <label for="whynow">Why now, and not a year ago?</label>
+            <textarea id="whynow" name="whynow" style="min-height:90px" required></textarea>
+            <div class="error-text">Answer this one.</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group-title">Your Teachability Index</legend>
+
+          <div class="field" id="learn-field">
+            <label for="learn">How willing are you to learn?</label>
+            <span class="hint">Even when what you learn is about you.</span>
+            <div class="rate">
+              <input type="range" id="learn" name="learn" min="0" max="10" step="1" value="5" class="unset" aria-valuetext="Not rated yet">
+              <output for="learn" id="learn-out" class="unset">–</output>
+              <div class="scale-ends" aria-hidden="true"><span>0</span><span>10</span></div>
+            </div>
+            <div class="error-text">Move the slider to rate yourself.</div>
+          </div>
+
+          <div class="field" id="change-field">
+            <label for="change">How willing are you to change?</label>
+            <span class="hint">Even when it means being wrong about yourself.</span>
+            <div class="rate">
+              <input type="range" id="change" name="change" min="0" max="10" step="1" value="5" class="unset" aria-valuetext="Not rated yet">
+              <output for="change" id="change-out" class="unset">–</output>
+              <div class="scale-ends" aria-hidden="true"><span>0</span><span>10</span></div>
+            </div>
+            <div class="error-text">Move the slider to rate yourself.</div>
+          </div>
+
+          <div class="index-result" aria-live="polite">
+            <span class="eq" id="index-eq">Rate both to see your index.</span>
+            <span class="total" id="index-total">–<small> / 100</small></span>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group-title">Last two things</legend>
+          <fieldset class="field" id="invest-field">
+            <legend class="label">1-1 coaching is an investment of your time and money. If it's the right fit, are you in a position to invest in yourself now?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="invest" value="Yes" required><span>Yes</span></label>
+              <label class="choice"><input type="radio" name="invest" value="I'd need to plan for it"><span>I'd need to plan for it</span></label>
+              <label class="choice"><input type="radio" name="invest" value="Not right now"><span>Not right now</span></label>
+            </div>
+            <div class="error-text">Pick the answer that's true for you.</div>
+          </fieldset>
+
+          <div class="field" id="commit-field">
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="commit" id="commit" value="Yes" required><span>I'm open to being challenged on the call, even when it's uncomfortable.</span></label>
+            </div>
+            <div class="error-text">Tick this if it's true. If it isn't, this isn't the right fit yet.</div>
+          </div>
+
+          <div class="field">
+            <label for="anything">Anything else I should know before your call? <span class="optional">(optional)</span></label>
+            <textarea id="anything" name="anything" style="min-height:90px"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="bot" aria-hidden="true">
+          <label for="botcheck">Leave this empty</label>
+          <input type="checkbox" id="botcheck" name="botcheck" tabindex="-1">
+        </div>
+
+        <button class="btn" type="submit" id="submit">Send my application</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+
+      <div class="sent" id="sent" tabindex="-1">
+        <h3>Application sent.</h3>
+        <p>I read every one myself. If it's a fit, I'll message you on Instagram at <strong id="sent-handle"></strong>.</p>
+        <p class="soft">Until then, keep noticing the chain. Next time something bothers you, ask which link it started at.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="name">The Origin Point</p>
+    <p>1-1 coaching with Miro Tzonkovski</p>
+    <p><a href="mailto:business@tzonkovski.com">business@tzonkovski.com</a></p>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     SETUP: paste your Web3Forms access key here.
+     Get it free at https://web3forms.com: enter business@tzonkovski.com
+     and the key arrives by email. Applications go to that inbox.
+     ============================================================ */
+  const WEB3FORMS_KEY = "ae2a07f0-3ce0-4a1e-a36b-8016a3ec02ba";
+
+  document.documentElement.classList.add("js");
+
+  // Draw the chain line once, when it scrolls into view.
+  (function () {
+    const chain = document.querySelector(".chain");
+    if (!("IntersectionObserver" in window)) { chain.classList.add("is-drawn"); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { chain.classList.add("is-drawn"); io.disconnect(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(chain);
+  })();
+
+  // Teachability sliders
+  const learn = document.getElementById("learn");
+  const change = document.getElementById("change");
+  const touched = { learn: false, change: false };
+
+  function updateIndex() {
+    const eq = document.getElementById("index-eq");
+    const total = document.getElementById("index-total");
+    if (touched.learn && touched.change) {
+      const l = +learn.value, c = +change.value;
+      eq.textContent = "Learn " + l + " × change " + c;
+      total.innerHTML = (l * c) + "<small> / 100</small>";
+    } else {
+      eq.textContent = "Rate both to see your index.";
+      total.innerHTML = "–<small> / 100</small>";
+    }
+  }
+
+  [learn, change].forEach((input) => {
+    const out = document.getElementById(input.id + "-out");
+    const mark = () => {
+      touched[input.id] = true;
+      input.classList.remove("unset");
+      out.classList.remove("unset");
+      out.textContent = input.value;
+      input.setAttribute("aria-valuetext", input.value + " out of 10");
+      document.getElementById(input.id + "-field").classList.remove("invalid");
+      updateIndex();
+    };
+    input.addEventListener("input", mark);
+    input.addEventListener("change", mark);
+    // A tap on the thumb without dragging still counts as an answer.
+    input.addEventListener("pointerup", mark);
+    input.addEventListener("keyup", (e) => { if (e.key.startsWith("Arrow") || e.key === "Home" || e.key === "End") mark(); });
+  });
+
+  // Validation
+  const form = document.getElementById("application");
+  const status = document.getElementById("form-status");
+  const submitBtn = document.getElementById("submit");
+
+  function cleanHandle(v) {
+    return v.trim()
+      .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
+      .replace(/[/?#].*$/, "")
+      .replace(/^@+/, "");
+  }
+
+  function fieldOf(el) { return el.closest(".field"); }
+
+  function validate() {
+    let firstBad = null;
+    const flag = (container, bad, focusEl) => {
+      container.classList.toggle("invalid", bad);
+      if (bad && !firstBad) firstBad = focusEl;
+    };
+
+    ["name", "now", "changed", "want", "whynow"].forEach((id) => {
+      const el = document.getElementById(id);
+      flag(fieldOf(el), !el.value.trim(), el);
+    });
+
+    const ig = document.getElementById("instagram");
+    flag(fieldOf(ig), !cleanHandle(ig.value), ig);
+
+    const email = document.getElementById("email");
+    const emailBad = email.value.trim() !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    flag(fieldOf(email), emailBad, email);
+
+    const linkPicked = form.querySelector("input[name=link]:checked");
+    flag(document.getElementById("link-field"), !linkPicked, form.querySelector("input[name=link]"));
+
+    flag(document.getElementById("learn-field"), !touched.learn, learn);
+    flag(document.getElementById("change-field"), !touched.change, change);
+
+    const investPicked = form.querySelector("input[name=invest]:checked");
+    flag(document.getElementById("invest-field"), !investPicked, form.querySelector("input[name=invest]"));
+
+    const commit = document.getElementById("commit");
+    flag(document.getElementById("commit-field"), !commit.checked, commit);
+
+    return firstBad;
+  }
+
+  // Clear an error as soon as the person fixes it.
+  form.addEventListener("input", (e) => {
+    const f = e.target.closest(".field");
+    if (f && f.classList.contains("invalid")) {
+      if (e.target.type === "radio" || e.target.type === "checkbox" || e.target.value.trim()) f.classList.remove("invalid");
+    }
+  });
+  form.addEventListener("change", (e) => {
+    const f = e.target.closest(".field");
+    if (f && (e.target.type === "radio" || e.target.type === "checkbox")) f.classList.remove("invalid");
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = "";
+    status.className = "form-status";
+
+    const firstBad = validate();
+    if (firstBad) {
+      status.textContent = "A few answers are missing. They're marked above.";
+      status.classList.add("error");
+      firstBad.focus({ preventScroll: true });
+      fieldOf(firstBad)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    if (!WEB3FORMS_KEY || WEB3FORMS_KEY === "YOUR_ACCESS_KEY_HERE") {
+      status.textContent = "Applications aren't connected yet. Message Miro on Instagram instead.";
+      status.classList.add("error");
+      console.error("The Origin Point: add your Web3Forms access key to WEB3FORMS_KEY in index.html.");
+      return;
+    }
+
+    const v = (id) => document.getElementById(id).value.trim();
+    const handle = cleanHandle(v("instagram"));
+    const l = +learn.value, c = +change.value;
+
+    const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: "New Origin Point application: " + v("name") + " (@" + handle + ")",
+      from_name: "The Origin Point",
+      "Name": v("name"),
+      "Instagram": "@" + handle + "  https://instagram.com/" + handle,
+      "Email": v("email") || "(not given)",
+      "Where they are now": v("now"),
+      "Already changed, same feeling": v("changed"),
+      "Stuck at link": form.querySelector("input[name=link]:checked").value,
+      "Why that link": v("link-why") || "(not given)",
+      "Different in six months": v("want"),
+      "Why now": v("whynow"),
+      "Teachability Index": (l * c) + " / 100  (learn " + l + " × change " + c + ")",
+      "Ready to invest": form.querySelector("input[name=invest]:checked").value,
+      "Open to being challenged": "Yes",
+      "Anything else": v("anything") || "(nothing)"
+    };
+    if (v("email")) payload.replyto = v("email");
+    if (document.getElementById("botcheck").checked) payload.botcheck = true;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) throw new Error(data.message || ("HTTP " + res.status));
+
+      document.getElementById("sent-handle").textContent = "@" + handle;
+      document.getElementById("apply").classList.add("is-sent");
+      const sent = document.getElementById("sent");
+      sent.scrollIntoView({ behavior: "smooth", block: "center" });
+      sent.focus({ preventScroll: true });
+    } catch (err) {
+      console.error(err);
+      status.textContent = "Your application didn't send. Your answers are still here, so check your connection and press Send again.";
+      status.classList.add("error");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send my application";
+    }
+  });
+</script>
+</body>
+</html>
