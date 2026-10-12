@@ -18,6 +18,9 @@
 <meta name="theme-color" content="#08070F">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script>document.documentElement.classList.add("js");</script>
+<!-- Vercel Web Analytics: counts visitors once Analytics is enabled for this project in Vercel. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,6 +288,32 @@
   .orb { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-size: 1.5rem; color: #120E24; background: radial-gradient(circle at 34% 30%, #FFF4EA, var(--c) 52%, var(--c2) 100%); box-shadow: 0 0 34px 2px var(--g); animation: float 6s ease-in-out infinite; animation-delay: var(--d); }
   @keyframes float { 50% { transform: translateY(-8px); box-shadow: 0 0 50px 8px var(--g); } }
 
+  /* Facts */
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 2rem 0 0; }
+  .facts > div { padding: 18px 20px; border-radius: 16px; }
+  .facts dt { font-size: .9rem; color: var(--dim); margin-bottom: 2px; }
+  .facts dd { margin: 0; font-family: var(--display); font-size: 1.3rem; line-height: 1.3; font-variation-settings: "opsz" 48; }
+  .facts dd span { display: block; font-family: var(--sans); font-size: .92rem; color: var(--ember); margin-top: 2px; }
+  @media (min-width: 760px) { .facts { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Price */
+  .price { padding: 8px 26px; margin: 0 0 2.4rem; max-width: 30rem; }
+  .price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 0; }
+  .price-row + .price-row { border-top: 1px solid var(--glass-line); }
+  .price-row .label { color: var(--mist); font-size: 1rem; }
+  .price-row s { font-family: var(--display); font-size: 1.6rem; color: var(--dim); text-decoration-thickness: 1.5px; }
+  .price-row b { font-family: var(--display); font-weight: 400; font-size: 2.6rem; line-height: 1; }
+
+  /* FAQ */
+  #faq::before { background: radial-gradient(40% 25% at 10% 50%, rgba(92, 214, 201, .08), transparent 70%); }
+  .faq { display: grid; gap: 10px; margin-top: 2rem; }
+  .faq details { border-radius: 16px; padding: 0 22px; }
+  .faq summary { list-style: none; cursor: pointer; padding: 20px 34px 20px 0; position: relative; font-family: var(--display); font-size: 1.3rem; line-height: 1.3; font-variation-settings: "opsz" 48; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 10px; height: 10px; border-right: 1.5px solid var(--ember); border-bottom: 1.5px solid var(--ember); transform: translateY(-70%) rotate(45deg); transition: transform .4s var(--ease); }
+  .faq details[open] summary::after { transform: translateY(-30%) rotate(225deg); }
+  .faq details p { color: var(--mist); margin: 0 0 20px; }
+
   /* ---------- Application ---------- */
   #apply::before { background: radial-gradient(45% 22% at 50% 30%, rgba(160, 139, 255, .14), transparent 70%); }
   .apply-panel { padding: clamp(22px, 5vw, 44px); margin-top: 2.25rem; }
@@ -529,6 +558,7 @@
           <p class="say reveal" style="margin: 1.75rem 0"><em class="dawn-text">Same person. Same results. Same plan.</em></p>
           <p class="reveal">So my state wasn't coming from my results. It was coming from further back: beliefs I'd picked up, emotions I'd never looked at, a sense of my own worth that was wired in long before any of it.</p>
           <p class="mist reveal">More success wasn't going to fix that. Nothing at the bottom of the chain was. I had to go to the start of it. The Origin Point is the work I did there, built for people like you.</p>
+          <p class="reveal">Before this, I spent years on sales calls with people building businesses, first booking the calls, then closing them, and collected close to $1M across different industries. Listen to that many people explain their business and you start hearing the same story under the numbers: it's working, and it still isn't enough. That's the story I work with.</p>
         </div>
       </div>
     </div>
@@ -537,7 +567,13 @@
   <section id="intensive">
     <div class="wrap wide">
       <h2 class="reveal">The intensive</h2>
-      <p class="mist reveal" style="max-width: 40rem">Private and 1-1. A few full days of focused work, just you and me. It runs in two stages, and the order matters.</p>
+      <p class="mist reveal" style="max-width: 40rem">Private and 1-1. Five days of live work over video, just you and me. It runs in two stages, and the order matters.</p>
+      <dl class="facts reveal">
+        <div class="glass"><dt>Format</dt><dd>Private, 1-1</dd></div>
+        <div class="glass"><dt>Length</dt><dd>5 days</dd></div>
+        <div class="glass"><dt>Where</dt><dd>Online, live video</dd></div>
+        <div class="glass"><dt>Investment</dt><dd>$2,999<span>$499 for the first three</span></dd></div>
+      </dl>
 
       <div class="stages">
         <div class="stage glass reveal" style="--c: #A08BFF">
@@ -612,9 +648,26 @@
         <span class="orb" style="--c:#E8899B; --c2:#C86A8A; --g:rgba(232,137,155,.5); --d:-2s">2</span>
         <span class="orb" style="--c:#A08BFF; --c2:#7A64E6; --g:rgba(160,139,255,.5); --d:-4s">3</span>
       </div>
-      <p class="reveal">The Origin Point is new. The first three people go through the full intensive for a three-figure investment. That rate is for those three only.</p>
-      <p class="say reveal">If you're afraid to put that into yourself, <em class="dawn-text">this isn't for you.</em></p>
-      <p class="mist reveal">If you notice that fear as you read this, ask what it's protecting. That's the kind of question the intensive is built on.</p>
+      <div class="price glass reveal">
+        <div class="price-row"><span class="label">The five-day intensive</span><s>$2,999</s></div>
+        <div class="price-row"><span class="label">Founding rate, first three only</span><b class="dawn-text">$499</b></div>
+      </div>
+      <p class="reveal">The Origin Point is new. The first three people go through the full five days for $499. In return, I ask for two things: honest feedback, and permission to share what changed for you as a case study. After those three, it's $2,999.</p>
+      <p class="say reveal">If $499 to look at what's been running your life feels like too much, <em class="dawn-text">this isn't for you.</em></p>
+      <p class="mist reveal">If you notice resistance as you read that, ask what it's protecting. That's the kind of question the intensive is built on.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="reveal">Questions you might have</h2>
+      <div class="faq">
+        <details class="glass reveal"><summary>Is this therapy?</summary><p>No. It's coaching: direct, practical work on how your conditioning shapes your state and your decisions today, and on changing it. If you're dealing with a mental-health condition, keep working with a licensed professional. This doesn't replace that.</p></details>
+        <details class="glass reveal"><summary>How does it work online?</summary><p>Five days of live 1-1 sessions over video. You need a quiet room, a notebook, and to show up fully present.</p></details>
+        <details class="glass reveal"><summary>What happens after I apply?</summary><p>I read your application myself. If it's a fit, I'll message you on Instagram to set up a short call. On that call, you and I decide whether this is right for you. If it is, you pick your five days.</p></details>
+        <details class="glass reveal"><summary>Why is it $499?</summary><p>It's the founding rate. The first three clients get it in exchange for honest feedback and a case study. After that, the intensive is $2,999.</p></details>
+        <details class="glass reveal"><summary>What if it doesn't work for me?</summary><p>That's what the application and the call are for. I only take on people I believe this will work for. If I don't think you're a fit, I'll tell you on the call.</p></details>
+      </div>
     </div>
   </section>
 
@@ -665,55 +718,6 @@
         </fieldset>
 
         <fieldset class="group">
-          <legend class="group-title">What's running you</legend>
-          <fieldset class="field" id="runs-field">
-            <legend class="label">What decides how you feel more than you'd like?</legend>
-            <span class="hint">Pick everything that's true.</span>
-            <div class="choices two-col">
-              <label class="choice"><input type="checkbox" name="runs" value="Revenue and results"><span>Revenue and results</span></label>
-              <label class="choice"><input type="checkbox" name="runs" value="Clients"><span>Clients</span></label>
-              <label class="choice"><input type="checkbox" name="runs" value="My team"><span>My team</span></label>
-              <label class="choice"><input type="checkbox" name="runs" value="The market or the algorithm"><span>The market or the algorithm</span></label>
-              <label class="choice"><input type="checkbox" name="runs" value="What other people think"><span>What other people think</span></label>
-              <label class="choice"><input type="checkbox" name="runs" value="Something else"><span>Something else</span></label>
-            </div>
-            <div class="error-text">Pick at least one.</div>
-          </fieldset>
-          <div class="field">
-            <label for="tried">What have you already tried to fix it?</label>
-            <span class="hint" id="tried-hint">Coaches, courses, breathwork, holidays, bigger goals.</span>
-            <textarea id="tried" name="tried" aria-describedby="tried-hint" style="min-height:96px" required></textarea>
-            <div class="error-text">Answer this one, even if the answer is "nothing yet".</div>
-          </div>
-          <fieldset class="field" id="link-field">
-            <legend class="label">Which link of the chain feels like where you're stuck?</legend>
-            <span class="hint">Go with your first instinct.</span>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="link" value="Conditioning"><span><b>C</b><span>Conditioning: what I believe about myself</span></span></label>
-              <label class="choice"><input type="radio" name="link" value="State"><span><b>S</b><span>State: how I feel day to day</span></span></label>
-              <label class="choice"><input type="radio" name="link" value="Behavior"><span><b>B</b><span>Behavior: how I lead and decide</span></span></label>
-              <label class="choice"><input type="radio" name="link" value="Results"><span><b>R</b><span>Results: what I'm getting</span></span></label>
-              <label class="choice"><input type="radio" name="link" value="Not sure"><span>I'm not sure yet</span></label>
-            </div>
-            <div class="error-text">Pick one, even if you're not sure.</div>
-          </fieldset>
-        </fieldset>
-
-        <fieldset class="group">
-          <legend class="group-title">Where you want to go</legend>
-          <div class="field">
-            <label for="want">If this works, what's different six months from now?</label>
-            <textarea id="want" name="want" required></textarea>
-            <div class="error-text">Answer this one so I know what you're after.</div>
-          </div>
-          <div class="field">
-            <label for="whynow">Why now, and not a year ago?</label>
-            <textarea id="whynow" name="whynow" style="min-height:96px" required></textarea>
-            <div class="error-text">Answer this one.</div>
-          </div>
-        </fieldset>
-
-        <fieldset class="group">
           <legend class="group-title">Your Teachability Index</legend>
           <div class="field" id="learn-field">
             <label for="learn">How willing are you to learn?</label>
@@ -742,9 +746,9 @@
         </fieldset>
 
         <fieldset class="group">
-          <legend class="group-title">Last two things</legend>
+          <legend class="group-title">Last thing</legend>
           <fieldset class="field" id="invest-field">
-            <legend class="label">The three founding clients invest a three-figure amount. If it's the right fit, are you ready to put that into yourself?</legend>
+            <legend class="label">The founding rate for the five-day intensive is $499. If it's the right fit, are you ready to invest that in yourself?</legend>
             <div class="choices">
               <label class="choice"><input type="radio" name="invest" value="Yes"><span>Yes</span></label>
               <label class="choice"><input type="radio" name="invest" value="I'd need to think about it"><span>I'd need to think about it</span></label>
@@ -752,12 +756,6 @@
             </div>
             <div class="error-text">Pick the answer that's true for you.</div>
           </fieldset>
-          <div class="field" id="commit-field">
-            <div class="choices">
-              <label class="choice"><input type="checkbox" name="commit" id="commit" value="Yes"><span>I'm open to being challenged, even when it's uncomfortable.</span></label>
-            </div>
-            <div class="error-text">Tick this if it's true. If it isn't, this isn't the right fit yet.</div>
-          </div>
           <div class="field">
             <label for="anything">Anything else I should know? <span class="optional">(optional)</span></label>
             <textarea id="anything" name="anything" style="min-height:90px"></textarea>
@@ -971,15 +969,9 @@
     const email = document.getElementById("email");
     flag(fieldOf(email), email.value.trim() !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()), email);
     need("built"); need("gap");
-    flag(document.getElementById("runs-field"), !form.querySelector("input[name=runs]:checked"), form.querySelector("input[name=runs]"));
-    need("tried");
-    flag(document.getElementById("link-field"), !form.querySelector("input[name=link]:checked"), form.querySelector("input[name=link]"));
-    need("want"); need("whynow");
     flag(document.getElementById("learn-field"), !touched.learn, learn);
     flag(document.getElementById("change-field"), !touched.change, change);
     flag(document.getElementById("invest-field"), !form.querySelector("input[name=invest]:checked"), form.querySelector("input[name=invest]"));
-    const commit = document.getElementById("commit");
-    flag(document.getElementById("commit-field"), !commit.checked, commit);
     return firstBad;
   }
 
@@ -1008,7 +1000,6 @@
     const v = (id) => document.getElementById(id).value.trim();
     const handle = cleanHandle(v("instagram"));
     const l = +learn.value, c = +change.value;
-    const runs = [...form.querySelectorAll("input[name=runs]:checked")].map((i) => i.value).join(", ");
 
     const payload = {
       access_key: WEB3FORMS_KEY,
@@ -1019,14 +1010,8 @@
       "Email": v("email") || "(not given)",
       "What they've built": v("built"),
       "The gap (how it looks vs how it feels)": v("gap"),
-      "What decides how they feel": runs,
-      "Already tried": v("tried"),
-      "Stuck at link": form.querySelector("input[name=link]:checked").value,
-      "Different in six months": v("want"),
-      "Why now": v("whynow"),
       "Teachability Index": (l * c) + " / 100  (learn " + l + " × change " + c + ")",
-      "Ready to invest (founding, three figures)": form.querySelector("input[name=invest]:checked").value,
-      "Open to being challenged": "Yes",
+      "Ready to invest $499": form.querySelector("input[name=invest]:checked").value,
       "Anything else": v("anything") || "(nothing)"
     };
     if (v("email")) payload.replyto = v("email");
