@@ -252,13 +252,13 @@ a { color: var(--fg); }
 
     <div class="cta">
       <h2>This is not who you are. It's who you <em>learned</em> to be.</h2>
-      <p>Everything learned can be unlearned. If you want to see where this pattern started and change it at the root, send me your result on Instagram with the word ORIGIN.</p>
+      <p id="ctaText">Everything learned can be unlearned. I'll message you personally on WhatsApp within 24 hours to look at your result with you. Can't wait? Send me your result on Instagram with the word ORIGIN.</p>
       <div class="code" id="code"></div>
       <div class="row">
         <button class="btn" id="copy" type="button">Copy my result</button>
         <a class="btn ghost" id="offer" href="/">See The Origin Point</a>
       </div>
-      <p class="note" id="copyNote">Paste it into a DM. I read every one myself.</p>
+      <p class="note" id="copyNote">Optional: paste it into an Instagram DM. I read every one myself.</p>
     </div>
 
     <button class="back" id="restart" type="button">Take it again</button>
@@ -424,7 +424,7 @@ a { color: var(--fg); }
     });
     $("code").textContent = "ORIGIN · " + p.plain + " · " + r.score + "/100";
     $("copy").textContent = "Copy my result";
-    $("copyNote").textContent = "Paste it into a DM. I read every one myself.";
+    $("copyNote").textContent = "Optional: paste it into an Instagram DM. I read every one myself.";
     show("result");
     $("dot").style.left = "0%";
     requestAnimationFrame(() => requestAnimationFrame(() => { $("dot").style.left = r.score + "%"; }));
@@ -450,7 +450,7 @@ a { color: var(--fg); }
       answers: answers.join(","), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
     };
     $("fSubmit").disabled = true; $("fSubmit").textContent = "One moment";
-    const go = () => { $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my result"; finish(); };
+    const go = () => { $("ctaText").textContent = "Everything learned can be unlearned, " + name + ". I'll message you personally on WhatsApp within 24 hours to look at your result with you. Can't wait? Send me your result on Instagram with the word ORIGIN."; $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my result"; finish(); };
     if (!LEAD_ENDPOINT) { go(); return; }
     let doneOnce = false; const once = () => { if (!doneOnce) { doneOnce = true; go(); } };
     setTimeout(once, 4000);
