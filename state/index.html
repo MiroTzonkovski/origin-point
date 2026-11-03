@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A 2-minute index for founders: how much of your state rides on results, and which pattern is running it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://origin-point-seven.vercel.app/state">
+<meta property="og:title" content="The State Index">
+<meta property="og:image" content="https://origin-point-seven.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08070F">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<meta property="og:description" content="Who decides how you feel? Find your pattern in 2 minutes.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>The State Index | The Origin Point</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: one centred column, one question per screen, like a film title card. Single dark look by choice. */
+:root {
+  color-scheme: dark;
+  --bg: #08070F;
+  --bg-2: #13102A;
+  --line: #2B2648;
+  --fg: #F1EDF9;
+  --muted: #B9B3CF;
+  --gold: #F2A56B;
+  --sage: #5CD6C9;
+  --terra: #E8899B;
+  --violet: #A08BFF;
+  --dawn: linear-gradient(100deg, #F6B783 0%, #E8899B 45%, #A893FF 92%);
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  --mono: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(60% 40% at 15% 0%, rgba(160, 139, 255, .16), transparent 70%),
+    radial-gradient(50% 35% at 90% 10%, rgba(92, 214, 201, .08), transparent 70%),
+    radial-gradient(70% 45% at 50% 115%, rgba(242, 165, 107, .14), transparent 70%);
+}
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 560px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column;
+}
+.top {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+.top .brand { color: var(--fg); text-decoration: none; font-family: var(--display); font-size: 16px; letter-spacing: .01em; text-transform: none; }
+.screen { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px; padding-block: 32px; }
+.screen[hidden] { display: none !important; }
+h1, h2 { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 144; margin: 0; text-wrap: balance; line-height: 1.08; }
+h1 { font-size: clamp(44px, 12vw, 64px); }
+h2 { font-size: clamp(30px, 8vw, 40px); }
+em { font-style: italic; background: var(--dawn); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .06em; }
+p { margin: 0; }
+.lede { color: var(--muted); font-size: 17px; max-width: 46ch; }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--muted); }
+.chain b { font-weight: 500; color: var(--fg); }
+.chain .arr { color: var(--line); }
+.meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.btn { text-decoration: none;
+  appearance: none; border: 0; background: var(--dawn); background-size: 160% 100%; background-position: 0 0; color: #120E24;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset, 0 12px 44px -12px rgba(232, 137, 155, .75);
+  font: 600 16px/1 var(--body); padding: 18px 26px; border-radius: 999px; cursor: pointer;
+  align-self: flex-start; transition: transform .15s ease, background .15s ease;
+}
+.btn:hover { background-position: 100% 0; }
+.btn:active { transform: scale(.98); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); box-shadow: none; }
+.btn.ghost:hover { border-color: var(--muted); background: transparent; }
+.btn:focus-visible, .opt:focus-visible, .back:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+
+/* question */
+.progress { height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--dawn); transition: width .35s ease; }
+.qnum { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.qtext { font-family: var(--display); font-size: clamp(28px, 7.4vw, 36px); line-height: 1.15; text-wrap: balance; }
+.opts { display: grid; gap: 10px; }
+.opt {
+  appearance: none; text-align: left; width: 100%;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); border-radius: 14px;
+  padding: 16px 18px; font: 400 16px/1.3 var(--body); cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.opt:hover { border-color: var(--muted); }
+.opt.sel { border-color: var(--violet); background: #1D1840; }
+.opt .dots { display: flex; gap: 4px; flex-shrink: 0; }
+.opt .dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+.opt .dots span.on { background: var(--violet); }
+.back { appearance: none; background: none; border: 0; color: var(--muted); font: 400 14px var(--body); cursor: pointer; padding: 6px 0; align-self: flex-start; }
+.back:hover { color: var(--fg); }
+.back[disabled] { visibility: hidden; }
+
+/* result */
+.score-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.score { font-family: var(--display); font-weight: 300; font-size: clamp(84px, 26vw, 128px); line-height: .85; color: var(--fg); font-variant-numeric: tabular-nums; }
+.score small { font-family: var(--mono); font-size: 14px; color: var(--muted); margin-left: 4px; }
+.band { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--terra); padding-bottom: 10px; }
+.meter { position: relative; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--sage), var(--violet) 45%, var(--gold) 75%, var(--terra)); }
+.meter i { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--fg); border: 3px solid var(--bg); transform: translate(-50%, -50%); transition: left .9s cubic-bezier(.2,.8,.2,1); }
+.meter-labels { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.card { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 14px; }
+.card p { color: var(--muted); }
+.csbr { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.csbr div { display: grid; grid-template-columns: 112px 1fr; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--line); }
+.csbr div:first-child { border-top: 0; background: #1D1840; }
+.csbr dt { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.csbr div:first-child dt { color: var(--violet); }
+.csbr dd { margin: 0; min-width: 0; }
+.csbr div:first-child dd { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 21px; line-height: 1.25; }
+.bars { display: grid; gap: 10px; }
+.bar { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 14px; }
+.bar span:last-child { font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar .track { grid-column: 1 / -1; height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar .track i { display: block; height: 100%; background: var(--muted); }
+.bar.is-top .track i { background: var(--dawn); }
+.bar.is-top span:first-child { color: var(--fg); }
+.cta { background: var(--bg-2); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 14px; }
+.code {
+  font-family: var(--mono); font-size: 15px; font-weight: 500; letter-spacing: .04em; color: var(--gold);
+  background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px;
+  user-select: all; -webkit-user-select: all; overflow-wrap: anywhere;
+}
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.row .btn { align-self: auto; }
+.note { font-size: 12px; color: var(--muted); }
+a { color: var(--fg); }
+.fine { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+
+.form { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; }
+.field label { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.field input[type=text], .field input[type=email], .field input[type=tel] {
+  width: 100%; background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); border-radius: 12px;
+  padding: 15px 16px; font: 400 16px/1.2 var(--body);
+}
+.field input:focus { outline: none; border-color: var(--violet); }
+.field input.bad { border-color: var(--terra); }
+.err { font-size: 13px; color: var(--terra); min-height: 1em; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--muted); cursor: pointer; }
+.consent input { margin-top: 3px; accent-color: var(--violet); width: 16px; height: 16px; flex-shrink: 0; }
+.locked { display: flex; gap: 10px; flex-wrap: wrap; }
+.locked span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; }
+.btn[disabled] { opacity: .6; cursor: wait; }
+
+.fade { animation: fade .45s ease both; }
+@keyframes fade { from { opacity: .001; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .fade { animation: none; } .meter i, .progress i { transition: none; } }
+@media (max-width: 400px) { .csbr div { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top"><a class="brand" href="/">The Origin Point</a><span id="topRight">Free · 2 min</span></div>
+
+  <!-- INTRO -->
+  <section class="screen fade" id="intro">
+    <p class="eyebrow">The State Index</p>
+    <h1>Who decides <em>how you feel?</em></h1>
+    <p class="lede">You built the business to be free. For a lot of founders, the numbers now decide what kind of day it is. Ten statements show how much of your state rides on results, and which pattern is running it.</p>
+    <div class="chain" aria-label="Conditioning, then State, then Behaviour, then Results">
+      <b>Conditioning</b><span class="arr">→</span><b>State</b><span class="arr">→</span><b>Behaviour</b><span class="arr">→</span><b>Results</b>
+    </div>
+    <div class="meta"><span>10 statements</span><span>About 2 minutes</span><span>Answer for the last 3 months</span></div>
+    <button class="btn" id="start" type="button">Find my State Index</button>
+  </section>
+
+  <!-- QUESTION -->
+  <section class="screen" id="quiz" hidden>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <p class="qnum" id="qnum">01 / 10</p>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts" role="radiogroup" aria-labelledby="qtext"></div>
+    <button class="back" id="back" type="button">← Back</button>
+  </section>
+
+  <!-- GATE -->
+  <section class="screen" id="gate" hidden>
+    <p class="eyebrow">Your result is ready</p>
+    <h2>Where should I send <em>your pattern?</em></h2>
+    <p class="lede">You'll see your score and pattern on the next screen. I'll also send you a short breakdown of what sits underneath it.</p>
+    <div class="locked" aria-hidden="true"><span>Score /100</span><span>Your pattern</span><span>Your CSBR chain</span></div>
+    <form class="form" id="leadForm" novalidate>
+      <div class="field"><label for="fName">First name</label><input type="text" id="fName" name="name" autocomplete="given-name" required></div>
+      <div class="field"><label for="fEmail">Email</label><input type="email" id="fEmail" name="email" autocomplete="email" inputmode="email" required></div>
+      <div class="field"><label for="fPhone">WhatsApp number</label><input type="tel" id="fPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+44 7700 900123" required></div>
+      <label class="consent" for="fConsent"><input type="checkbox" id="fConsent" required><span>Miro can contact me about my result by email and WhatsApp. I can opt out any time.</span></label>
+      <p class="err" id="fErr" role="alert"></p>
+      <button class="btn" id="fSubmit" type="submit">Show my result</button>
+    </form>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="result" hidden>
+    <p class="eyebrow">Your result</p>
+    <div>
+      <p class="note" style="margin-bottom:10px">Your State Index</p>
+      <div class="score-row"><div class="score"><span id="score">0</span><small>/100</small></div><div class="band" id="band"></div></div>
+    </div>
+    <div>
+      <div class="meter" aria-hidden="true"><i id="dot" style="left:0%"></i></div>
+      <div class="meter-labels"><span>At cause</span><span>At effect</span></div>
+    </div>
+    <p class="lede" id="bandText"></p>
+
+    <div class="card">
+      <p class="eyebrow">Your strongest pattern</p>
+      <h2 id="pName"></h2>
+      <p id="pDesc"></p>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow">How the chain runs for you</p>
+      <dl class="csbr" id="csbr"></dl>
+      <p id="pWhy"></p>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow">All four patterns</p>
+      <div class="bars" id="bars"></div>
+    </div>
+
+    <div class="cta">
+      <h2>This is not who you are. It's who you <em>learned</em> to be.</h2>
+      <p>Everything learned can be unlearned. If you want to see where this pattern started and change it at the root, send me your result on Instagram with the word ORIGIN.</p>
+      <div class="code" id="code"></div>
+      <div class="row">
+        <button class="btn" id="copy" type="button">Copy my result</button>
+        <a class="btn ghost" id="offer" href="/">See The Origin Point</a>
+      </div>
+      <p class="note" id="copyNote">Paste it into a DM. I read every one myself.</p>
+    </div>
+
+    <button class="back" id="restart" type="button">Take it again</button>
+    <p class="fine">The State Index describes patterns in how people experience results. It is not a diagnosis, therapy or medical advice.</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  // Patterns. Each statement feeds one pattern; q10 feeds the overall score only.
+  const P = {
+    scoreboard: {
+      name: "The <em>Scoreboard</em>",
+      plain: "The Scoreboard",
+      short: "Your numbers set your mood",
+      desc: "Revenue, the bank balance, this week's stats. They don't only tell you how the business is doing. They tell you how you're doing. A good day on the dashboard is a good day in your body. A slow month feels like a smaller you.",
+      belief: "“I am what I produce.”",
+      state: "Calm and confident when the numbers are up. Tight, restless, short with people when they're down.",
+      behaviour: "Checking stats to find out how to feel. Pushing harder in the bad weeks, unable to switch off in the good ones.",
+      results: "Some strong months, and a life that swings with them.",
+    },
+    verdict: {
+      name: "The <em>Verdict</em>",
+      plain: "The Verdict",
+      short: "Losses feel personal",
+      desc: "When a client leaves, a deal dies or someone criticises the work, it doesn't land as information about the deal. It lands as a judgement about you. It replays for days, and part of you is always bracing for the next one.",
+      belief: "“If they leave, something is wrong with me.”",
+      state: "On edge before calls and launches. A heavy, quiet sting after every no.",
+      behaviour: "Over-delivering, avoiding the hard conversation, softening the price, playing safe with what you put out.",
+      results: "Fewer risks taken, and growth that stays below what you know you're capable of.",
+    },
+    finishline: {
+      name: "The <em>Moving Finish Line</em>",
+      plain: "The Moving Finish Line",
+      short: "Wins don't stay won",
+      desc: "You hit the number you used to dream about, and the feeling is gone within days. On paper it all looks good. Inside, the finish line has already moved, and \"enough\" is always one more level away.",
+      belief: "“I'll be enough when I get there.”",
+      state: "A short high after each win, then a flat, quiet emptiness.",
+      behaviour: "Setting the next target before the last one has landed. Rarely stopping long enough to feel any of it.",
+      results: "A record month that feels empty, and a growing gap between how life looks and how it feels.",
+    },
+    waiting: {
+      name: "The <em>Waiting Room</em>",
+      plain: "The Waiting Room",
+      short: "You wait to feel ready",
+      desc: "You know the next move. You could explain it to someone else in a minute. And still it doesn't get made. You tell yourself you'll feel ready after one more number, one more level, one more round of planning.",
+      belief: "“I have to be ready before I'm seen.”",
+      state: "Restless and frustrated with yourself. A low hum of \"I should be further by now\".",
+      behaviour: "Researching, planning and tweaking instead of launching. Starting strong, then pulling back.",
+      results: "Ideas that stay ideas, and a version of you that stays in the waiting room.",
+    },
+  };
+
+  const Q = [
+    { t: "A good revenue day changes my mood more than anything else that happened that day.", p: "scoreboard" },
+    { t: "When a client leaves or a deal falls through, it feels like a verdict on me, not just on the deal.", p: "verdict" },
+    { t: "I hit a goal, and within days the good feeling is gone and I'm chasing the next one.", p: "finishline" },
+    { t: "I know exactly what my next move is, and I still don't make it.", p: "waiting" },
+    { t: "I check the numbers (sales, bank, stats) to find out how I should feel.", p: "scoreboard" },
+    { t: "Criticism of my work stays in my head for days.", p: "verdict" },
+    { t: "On paper my life looks good, and I still feel like something is missing.", p: "finishline" },
+    { t: "I tell myself I'll feel ready once I reach a certain number or level.", p: "waiting" },
+    { t: "In a slow month I feel like a different, smaller version of myself.", p: "scoreboard" },
+    { t: "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.", p: null },
+  ];
+  const A = ["Never", "Rarely", "Sometimes", "Often", "Almost always"];
+
+  const BANDS = [
+    { max: 30, label: "Mostly at cause", text: "Results move you, and you come back to yourself quickly. Your state doesn't wait for the numbers. Where you did score, that's the edge worth looking at." },
+    { max: 55, label: "Partly at effect", text: "Most days you're steady, and certain results still reach in and change the whole day. The pattern is there. It just doesn't run every day yet." },
+    { max: 79, label: "Results run you", text: "How the business is doing decides how you feel more often than you do. Good months and bad months feel like two different people." },
+    { max: 100, label: "Fully at effect", text: "Your state is wired to results. The business you built to be free now decides what kind of day you get to have." },
+  ];
+
+  // Lead receiver: the Google Apps Script web-app URL. Empty = leads aren't sent anywhere.
+  const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLSHld9x9YkRqwvs04W6qxebHwVx138eaBCgfs5FGpK3c0I2hTxK9mUMmPySBgr1DdKg/exec";
+
+  const $ = (id) => document.getElementById(id);
+  const answers = new Array(Q.length).fill(null);
+  let i = 0, busy = false;
+
+  function show(id) {
+    ["intro", "quiz", "gate", "result"].forEach((s) => { $(s).hidden = s !== id; });
+    const el = $(id); el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+    window.scrollTo(0, 0);
+  }
+
+  function renderQ() {
+    const q = Q[i];
+    $("qnum").textContent = String(i + 1).padStart(2, "0") + " / " + Q.length;
+    $("qtext").textContent = q.t;
+    $("bar").style.width = (i / Q.length * 100) + "%";
+    $("back").disabled = i === 0;
+    $("topRight").textContent = "Statement " + (i + 1);
+    const opts = $("opts"); opts.innerHTML = "";
+    A.forEach((label, v) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "opt" + (answers[i] === v ? " sel" : "");
+      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", answers[i] === v ? "true" : "false");
+      b.id = "opt-" + v;
+      const s = document.createElement("span"); s.textContent = label;
+      const d = document.createElement("span"); d.className = "dots";
+      for (let k = 0; k < 4; k++) { const dot = document.createElement("span"); if (k < v) dot.className = "on"; d.appendChild(dot); }
+      b.append(s, d);
+      b.addEventListener("click", () => pick(v, b));
+      opts.appendChild(b);
+    });
+    const q2 = $("quiz"); q2.classList.remove("fade"); void q2.offsetWidth; q2.classList.add("fade");
+  }
+
+  function pick(v, el) {
+    if (busy) return;
+    answers[i] = v; busy = true;
+    document.querySelectorAll(".opt").forEach((o) => { o.classList.remove("sel"); o.setAttribute("aria-checked", "false"); });
+    el.classList.add("sel"); el.setAttribute("aria-checked", "true");
+    setTimeout(() => {
+      busy = false;
+      if (i < Q.length - 1) { i++; renderQ(); } else { $("bar").style.width = "100%"; $("topRight").textContent = "Almost there"; show("gate"); }
+    }, 260);
+  }
+
+  function compute() {
+    const total = answers.reduce((s, v) => s + (v || 0), 0);
+    const score = Math.round(total / (Q.length * 4) * 100);
+    const per = {};
+    Object.keys(P).forEach((k) => {
+      const idx = Q.map((q, n) => q.p === k ? n : -1).filter((n) => n >= 0);
+      const sum = idx.reduce((s, n) => s + (answers[n] || 0), 0);
+      per[k] = Math.round(sum / (idx.length * 4) * 100);
+    });
+    const order = ["scoreboard", "verdict", "finishline", "waiting"];
+    const top = order.slice().sort((a, b) => per[b] - per[a] || order.indexOf(a) - order.indexOf(b))[0];
+    const band = BANDS.find((b) => score <= b.max);
+    return { score, per, top, band, order };
+  }
+
+  function finish() {
+    const r = compute(); const p = P[r.top];
+    $("topRight").textContent = "Result";
+    $("score").textContent = r.score;
+    $("band").textContent = r.band.label;
+    $("bandText").textContent = r.band.text;
+    $("pName").innerHTML = p.name;
+    $("pDesc").textContent = p.desc;
+    const csbr = $("csbr"); csbr.innerHTML = "";
+    [["Conditioning", p.belief], ["State", p.state], ["Behaviour", p.behaviour], ["Results", p.results]].forEach(([k, v]) => {
+      const row = document.createElement("div");
+      const dt = document.createElement("dt"); dt.textContent = k;
+      const dd = document.createElement("dd"); dd.textContent = v;
+      row.append(dt, dd); csbr.appendChild(row);
+    });
+    $("pWhy").textContent = answers[9] >= 2
+      ? "You've already tried fixing this at the level of state and behaviour, and it came back. That's what happens when the belief underneath stays the same. The chain only runs one way."
+      : "Most people try to fix this at the level of behaviour: new routines, more discipline, a better plan. It holds for a while. The belief underneath stays the same, so the pattern comes back. The chain only runs one way.";
+    const bars = $("bars"); bars.innerHTML = "";
+    r.order.slice().sort((a, b) => r.per[b] - r.per[a]).forEach((k) => {
+      const row = document.createElement("div"); row.className = "bar" + (k === r.top ? " is-top" : "");
+      const n = document.createElement("span"); n.textContent = P[k].plain + " · " + P[k].short;
+      const v = document.createElement("span"); v.textContent = r.per[k];
+      const t = document.createElement("div"); t.className = "track";
+      const f = document.createElement("i"); f.style.width = r.per[k] + "%"; t.appendChild(f);
+      row.append(n, v, t); bars.appendChild(row);
+    });
+    $("code").textContent = "ORIGIN · " + p.plain + " · " + r.score + "/100";
+    $("copy").textContent = "Copy my result";
+    $("copyNote").textContent = "Paste it into a DM. I read every one myself.";
+    show("result");
+    $("dot").style.left = "0%";
+    requestAnimationFrame(() => requestAnimationFrame(() => { $("dot").style.left = r.score + "%"; }));
+  }
+
+  $("leadForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = $("fName").value.trim(), email = $("fEmail").value.trim(), phoneRaw = $("fPhone").value.trim();
+    const phone = phoneRaw.replace(/[^\d+]/g, "");
+    ["fName", "fEmail", "fPhone"].forEach((id) => $(id).classList.remove("bad"));
+    let msg = "";
+    if (!name) { msg = "Add your first name."; $("fName").classList.add("bad"); }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg = "That email doesn't look right. Check it and try again."; $("fEmail").classList.add("bad"); }
+    else if (!/^\+\d{7,15}$/.test(phone)) { msg = "Add your WhatsApp number with the country code, starting with +."; $("fPhone").classList.add("bad"); }
+    else if (!$("fConsent").checked) { msg = "Tick the box so I can send you your breakdown."; }
+    $("fErr").textContent = msg;
+    if (msg) return;
+    const r = compute();
+    const params = new URLSearchParams(location.search);
+    const lead = {
+      name, email, phone, score: r.score, band: r.band.label, pattern: P[r.top].plain,
+      scoreboard: r.per.scoreboard, verdict: r.per.verdict, finishline: r.per.finishline, waiting: r.per.waiting,
+      answers: answers.join(","), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
+    };
+    $("fSubmit").disabled = true; $("fSubmit").textContent = "One moment";
+    const go = () => { $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my result"; finish(); };
+    if (!LEAD_ENDPOINT) { go(); return; }
+    let doneOnce = false; const once = () => { if (!doneOnce) { doneOnce = true; go(); } };
+    setTimeout(once, 4000);
+    try {
+      fetch(LEAD_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(lead) }).then(once, once);
+    } catch (err) { once(); }
+  });
+
+  $("start").addEventListener("click", () => { i = 0; show("quiz"); renderQ(); });
+  $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } });
+  $("restart").addEventListener("click", () => { answers.fill(null); i = 0; show("intro"); $("topRight").textContent = "Free · 2 min"; });
+  $("copy").addEventListener("click", () => {
+    const text = $("code").textContent;
+    const done = () => { $("copy").textContent = "Copied"; $("copyNote").textContent = "Now open Instagram and paste it into a DM to me."; };
+    const fallback = () => {
+      const range = document.createRange(); range.selectNodeContents($("code"));
+      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      $("copyNote").textContent = "Your result is selected. Copy it, then paste it into a DM to me.";
+    };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>

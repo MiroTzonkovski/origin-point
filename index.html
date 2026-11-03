@@ -97,6 +97,23 @@
     padding: 9px 18px; border-radius: 999px; border: 1px solid var(--glass-line); background: rgba(255,255,255,.03);
     transition: border-color .3s, background .3s;
   }
+  .bar-links { display: flex; align-items: center; gap: 18px; }
+  .bar-link { font-size: .95rem; color: var(--mist); text-decoration: none; transition: color .3s; }
+  .bar-link:hover { color: var(--star); }
+  @media (max-width: 420px) { .bar-links { gap: 12px; } .bar-link { font-size: .88rem; } }
+
+  /* ---------- State Index invite ---------- */
+  .index-invite { padding: clamp(56px, 9vw, 96px) 0; }
+  .index-card {
+    display: grid; gap: 18px; padding: clamp(26px, 5vw, 44px); border-radius: 26px; text-align: left;
+    border: 1px solid var(--glass-line); background:
+      radial-gradient(80% 120% at 100% 0%, rgba(160, 139, 255, .14), transparent 60%),
+      radial-gradient(70% 90% at 0% 100%, rgba(242, 165, 107, .10), transparent 60%), var(--glass);
+  }
+  .index-card .kicker { font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); margin: 0; }
+  .index-card h2 { font-size: clamp(2rem, 6vw, 2.8rem); }
+  .index-card p { color: var(--mist); margin: 0; max-width: 34rem; }
+  .index-card .btn { justify-self: start; margin-top: 6px; }
   .bar-apply:hover { border-color: rgba(160, 139, 255, .6); background: rgba(160, 139, 255, .08); }
 
   /* ---------- Hero ---------- */
@@ -409,7 +426,10 @@
       </svg>
       The Origin Point
     </a>
-    <a class="bar-apply" href="#apply">Apply</a>
+    <nav class="bar-links">
+      <a class="bar-link" href="/state">State Index</a>
+      <a class="bar-apply" href="#apply">Apply</a>
+    </nav>
   </div>
 </header>
 
@@ -496,6 +516,17 @@
           <div class="row"><div class="sit">A client leaves</div><div class="ans"><span class="eff">It feels like a verdict on you.</span><span class="cau">It's a business problem, not a worth problem.</span></div></div>
           <div class="row"><div class="sit">Who decides how you feel</div><div class="ans"><span class="eff">The numbers, the market, other people.</span><span class="cau">You.</span></div></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="index-invite" id="state-index" aria-labelledby="index-title">
+    <div class="wrap">
+      <div class="index-card reveal">
+        <p class="kicker">Free · 2 minutes</p>
+        <h2 id="index-title">Find your <span class="dawn-text">State Index.</span></h2>
+        <p>Ten statements. One number for how much of your state rides on results, and the pattern that's running it.</p>
+        <a class="btn" href="/state">Find my State Index</a>
       </div>
     </div>
   </section>
