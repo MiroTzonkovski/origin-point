@@ -277,6 +277,7 @@ a { color: var(--fg); }
       <p class="belief" id="rBelief"></p>
       <p class="ask" id="rAsk"></p>
     </div>
+    <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Send my report on WhatsApp</a>
     <div>
       <div class="meter" aria-hidden="true"><i id="dot" style="left:0%"></i></div>
       <div class="meter-labels"><span>At cause</span><span>At effect</span></div>
@@ -381,7 +382,7 @@ a { color: var(--fg); }
   ];
 
   // Lead receiver: the Google Apps Script web-app URL. Empty = leads aren't sent anywhere.
-  const IG_HANDLE = ""; // e.g. "miro.tzonkovski" (no @). Empty = "DM me on Instagram" without a handle.
+  const WA_NUMBER = "35795600875"; // Miro's WhatsApp, digits only with country code
   const ABOUT = {
     role: [["founder", "Founder / business owner"], ["closer", "Closer / in sales"], ["employee", "Employed"], ["other", "Something else"]],
     revenue: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]],
@@ -455,9 +456,8 @@ a { color: var(--fg); }
     if (about.readiness !== "curious" && score >= 31) return "Warm";
     return "Cool";
   }
-  function igLink() {
-    if (!IG_HANDLE) return "on Instagram";
-    return '<a href="https://instagram.com/' + IG_HANDLE + '" target="_blank" rel="noopener">@' + IG_HANDLE + '</a> on Instagram';
+  function waLink(text) {
+    return '<a href="https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text) + '" target="_blank" rel="noopener">on WhatsApp</a>';
   }
   let leadName = "";
 
@@ -492,11 +492,14 @@ a { color: var(--fg); }
     $("who").textContent = leadName ? leadName + "'s State Report" : "Your State Report";
     $("rPat").innerHTML = "Pattern: " + p.name;
     $("rBelief").textContent = p.belief;
+    const waText = "Hi Miro, " + (leadName ? "it's " + leadName + ". " : "") + "Here's my State Report: " + p.plain + ", " + r.score + "/100.";
+    $("waBtn").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(waText);
+    $("waBtn").hidden = pr !== "Hot";
     if (pr === "Hot") {
-      $("rAsk").innerHTML = "Screenshot this and DM it to me " + igLink() + ". I'll reply personally and we'll look at where your pattern started.";
-      $("ctaText").textContent = "Everything learned can be unlearned" + (leadName ? ", " + leadName : "") + ". Screenshot your report above and send it to me in a DM. I read every one myself.";
+      $("rAsk").innerHTML = "Screenshot this and send it to me " + waLink(waText) + ". I'll reply personally and we'll look at where your pattern started.";
+      $("ctaText").textContent = "Everything learned can be unlearned" + (leadName ? ", " + leadName : "") + ". Screenshot your report above and send it to me on WhatsApp. I read every one myself.";
     } else {
-      $("rAsk").innerHTML = "I'll message you personally on WhatsApp within 24 hours to look at this with you. Want to talk sooner? Screenshot this and DM it to me " + igLink() + ".";
+      $("rAsk").innerHTML = "I'll message you personally on WhatsApp within 24 hours to look at this with you. Want to talk sooner? Screenshot this and send it to me " + waLink(waText) + ".";
       $("ctaText").textContent = "Everything learned can be unlearned" + (leadName ? ", " + leadName : "") + ". I'll message you on WhatsApp within 24 hours to look at your report with you.";
     }
     show("result");
