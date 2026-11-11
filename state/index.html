@@ -172,6 +172,30 @@ a { color: var(--fg); }
 .locked span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; }
 .btn[disabled] { opacity: .6; cursor: wait; }
 
+.group { display: grid; gap: 10px; }
+.group-label { font-family: var(--display); font-weight: 300; font-size: 22px; line-height: 1.2; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { appearance: none; background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 11px 16px; font: 400 15px/1.2 var(--body); cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip.sel { border-color: var(--violet); background: #1D1840; }
+.chip:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+.field textarea { width: 100%; min-height: 84px; resize: vertical; background: var(--bg-2); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; font: 400 16px/1.45 var(--body); }
+.field textarea:focus { outline: none; border-color: var(--violet); }
+.field textarea.bad { border-color: var(--terra); }
+.field .hint { font-size: 13px; color: var(--muted); }
+.report {
+  border: 1px solid var(--line); border-radius: 22px; padding: 22px 20px; display: grid; gap: 14px;
+  background: radial-gradient(90% 70% at 100% 0%, rgba(160,139,255,.18), transparent 60%), radial-gradient(80% 60% at 0% 100%, rgba(242,165,107,.12), transparent 60%), var(--bg-2);
+}
+.report-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.report-top b { font-family: var(--display); font-weight: 300; font-size: 15px; letter-spacing: .01em; text-transform: none; color: var(--fg); }
+.report .who { font-family: var(--display); font-weight: 300; font-size: 26px; line-height: 1.15; }
+.report .score { font-size: clamp(72px, 22vw, 104px); }
+.report .pat { font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 1.15; }
+.report .belief { font-family: var(--display); font-style: italic; font-weight: 300; color: var(--muted); font-size: 18px; }
+.report .ask { border-top: 1px solid var(--line); padding-top: 14px; font-size: 15px; color: var(--fg); }
+.report .ask a { color: var(--gold); font-weight: 600; text-decoration: none; }
+
 .fade { animation: fade .45s ease both; }
 @keyframes fade { from { opacity: .001; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .fade { animation: none; } .meter i, .progress i { transition: none; } }
@@ -181,18 +205,18 @@ a { color: var(--fg); }
 <body>
 
 <div class="wrap">
-  <div class="top"><a class="brand" href="/">The Origin Point</a><span id="topRight">Free · 2 min</span></div>
+  <div class="top"><a class="brand" href="/">The Origin Point</a><span id="topRight">Free · 3 min</span></div>
 
   <!-- INTRO -->
   <section class="screen fade" id="intro">
     <p class="eyebrow">The State Index</p>
     <h1>Who decides <em>how you feel?</em></h1>
-    <p class="lede">You built the business to be free. For a lot of founders, the numbers now decide what kind of day it is. Ten statements show how much of your state rides on results, and which pattern is running it.</p>
+    <p class="lede">You built the business to be free. For a lot of founders, the numbers now decide what kind of day it is. Answer 10 statements and 5 quick questions about where you are, and get your personal State Report: your score, the pattern running it, and where it starts.</p>
     <div class="chain" aria-label="Conditioning, then State, then Behaviour, then Results">
       <b>Conditioning</b><span class="arr">→</span><b>State</b><span class="arr">→</span><b>Behaviour</b><span class="arr">→</span><b>Results</b>
     </div>
-    <div class="meta"><span>10 statements</span><span>About 2 minutes</span><span>Answer for the last 3 months</span></div>
-    <button class="btn" id="start" type="button">Find my State Index</button>
+    <div class="meta"><span>10 statements + 5 questions</span><span>About 3 minutes</span><span>Answer for the last 3 months</span></div>
+    <button class="btn" id="start" type="button">Get my State Report</button>
   </section>
 
   <!-- QUESTION -->
@@ -204,11 +228,34 @@ a { color: var(--fg); }
     <button class="back" id="back" type="button">← Back</button>
   </section>
 
+  <!-- PERSONAL: TAPS -->
+  <section class="screen" id="about" hidden>
+    <p class="eyebrow">Make it personal · 1 of 2</p>
+    <h2>Three quick taps about <em>where you are.</em></h2>
+    <div class="group"><p class="group-label" id="lRole">What do you do?</p><div class="chips" data-key="role" role="radiogroup" aria-labelledby="lRole"></div></div>
+    <div class="group"><p class="group-label" id="lRev">Monthly revenue or income?</p><div class="chips" data-key="revenue" role="radiogroup" aria-labelledby="lRev"></div></div>
+    <div class="group"><p class="group-label" id="lReady">Where are you with this?</p><div class="chips" data-key="readiness" role="radiogroup" aria-labelledby="lReady"></div></div>
+    <p class="err" id="aErr" role="alert"></p>
+    <button class="btn" id="aNext" type="button">Next</button>
+  </section>
+
+  <!-- PERSONAL: TYPED -->
+  <section class="screen" id="words" hidden>
+    <p class="eyebrow">Make it personal · 2 of 2</p>
+    <h2>In your <em>own words.</em></h2>
+    <p class="lede">Two questions. This is what makes the report about you. Be honest. Nobody sees it but me.</p>
+    <div class="field"><label for="tHold">What happens in you when a month closes below target?</label><textarea id="tHold" maxlength="600"></textarea></div>
+    <div class="field"><label for="tTried">What have you already tried to fix it?</label><textarea id="tTried" maxlength="600"></textarea><span class="hint">Optional</span></div>
+    <p class="err" id="wErr" role="alert"></p>
+    <button class="btn" id="wNext" type="button">Next</button>
+    <button class="back" id="wBack" type="button">← Back</button>
+  </section>
+
   <!-- GATE -->
   <section class="screen" id="gate" hidden>
-    <p class="eyebrow">Your result is ready</p>
-    <h2>Where should I send <em>your pattern?</em></h2>
-    <p class="lede">You'll see your score and pattern on the next screen. I'll also send you a short breakdown of what sits underneath it.</p>
+    <p class="eyebrow">Your State Report is ready</p>
+    <h2>Where should I send <em>your report?</em></h2>
+    <p class="lede">You'll see your report on the next screen. I read every one myself and send you a short breakdown of what sits underneath your pattern.</p>
     <div class="locked" aria-hidden="true"><span>Score /100</span><span>Your pattern</span><span>Your CSBR chain</span></div>
     <form class="form" id="leadForm" novalidate>
       <div class="field"><label for="fName">First name</label><input type="text" id="fName" name="name" autocomplete="given-name" required></div>
@@ -216,16 +263,19 @@ a { color: var(--fg); }
       <div class="field"><label for="fPhone">WhatsApp number</label><input type="tel" id="fPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+44 7700 900123" required></div>
       <label class="consent" for="fConsent"><input type="checkbox" id="fConsent" required><span>Miro can contact me about my result by email and WhatsApp. I can opt out any time.</span></label>
       <p class="err" id="fErr" role="alert"></p>
-      <button class="btn" id="fSubmit" type="submit">Show my result</button>
+      <button class="btn" id="fSubmit" type="submit">Show my State Report</button>
     </form>
   </section>
 
   <!-- RESULT -->
   <section class="screen" id="result" hidden>
-    <p class="eyebrow">Your result</p>
-    <div>
-      <p class="note" style="margin-bottom:10px">Your State Index</p>
+    <div class="report" id="report">
+      <div class="report-top"><b>The Origin Point</b><span>State Report</span></div>
+      <p class="who" id="who">Your State Report</p>
       <div class="score-row"><div class="score"><span id="score">0</span><small>/100</small></div><div class="band" id="band"></div></div>
+      <p class="pat" id="rPat"></p>
+      <p class="belief" id="rBelief"></p>
+      <p class="ask" id="rAsk"></p>
     </div>
     <div>
       <div class="meter" aria-hidden="true"><i id="dot" style="left:0%"></i></div>
@@ -252,13 +302,10 @@ a { color: var(--fg); }
 
     <div class="cta">
       <h2>This is not who you are. It's who you <em>learned</em> to be.</h2>
-      <p id="ctaText">Everything learned can be unlearned. I'll message you personally on WhatsApp within 24 hours to look at your result with you. Can't wait? Send me your result on Instagram with the word ORIGIN.</p>
-      <div class="code" id="code"></div>
+      <p id="ctaText">Everything learned can be unlearned.</p>
       <div class="row">
-        <button class="btn" id="copy" type="button">Copy my result</button>
         <a class="btn ghost" id="offer" href="/">See The Origin Point</a>
       </div>
-      <p class="note" id="copyNote">Optional: paste it into an Instagram DM. I read every one myself.</p>
     </div>
 
     <button class="back" id="restart" type="button">Take it again</button>
@@ -334,6 +381,13 @@ a { color: var(--fg); }
   ];
 
   // Lead receiver: the Google Apps Script web-app URL. Empty = leads aren't sent anywhere.
+  const IG_HANDLE = ""; // e.g. "miro.tzonkovski" (no @). Empty = "DM me on Instagram" without a handle.
+  const ABOUT = {
+    role: [["founder", "Founder / business owner"], ["closer", "Closer / in sales"], ["employee", "Employed"], ["other", "Something else"]],
+    revenue: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]],
+    readiness: [["curious", "Just curious"], ["understand", "I want to understand it"], ["ready", "I'm ready to change it"]],
+  };
+  const about = { role: null, revenue: null, readiness: null };
   const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLSHld9x9YkRqwvs04W6qxebHwVx138eaBCgfs5FGpK3c0I2hTxK9mUMmPySBgr1DdKg/exec";
 
   const $ = (id) => document.getElementById(id);
@@ -341,7 +395,7 @@ a { color: var(--fg); }
   let i = 0, busy = false;
 
   function show(id) {
-    ["intro", "quiz", "gate", "result"].forEach((s) => { $(s).hidden = s !== id; });
+    ["intro", "quiz", "about", "words", "gate", "result"].forEach((s) => { $(s).hidden = s !== id; });
     const el = $(id); el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
     window.scrollTo(0, 0);
   }
@@ -376,7 +430,7 @@ a { color: var(--fg); }
     el.classList.add("sel"); el.setAttribute("aria-checked", "true");
     setTimeout(() => {
       busy = false;
-      if (i < Q.length - 1) { i++; renderQ(); } else { $("bar").style.width = "100%"; $("topRight").textContent = "Almost there"; show("gate"); }
+      if (i < Q.length - 1) { i++; renderQ(); } else { $("bar").style.width = "100%"; $("topRight").textContent = "Almost there"; show("about"); }
     }, 260);
   }
 
@@ -394,6 +448,18 @@ a { color: var(--fg); }
     const band = BANDS.find((b) => score <= b.max);
     return { score, per, top, band, order };
   }
+
+  function priority(score) {
+    const qualified = (about.role === "founder" || about.role === "closer") && ["10-30", "30-100", "100+"].includes(about.revenue);
+    if (qualified && about.readiness === "ready" && score >= 50) return "Hot";
+    if (about.readiness !== "curious" && score >= 31) return "Warm";
+    return "Cool";
+  }
+  function igLink() {
+    if (!IG_HANDLE) return "on Instagram";
+    return '<a href="https://instagram.com/' + IG_HANDLE + '" target="_blank" rel="noopener">@' + IG_HANDLE + '</a> on Instagram';
+  }
+  let leadName = "";
 
   function finish() {
     const r = compute(); const p = P[r.top];
@@ -422,9 +488,17 @@ a { color: var(--fg); }
       const f = document.createElement("i"); f.style.width = r.per[k] + "%"; t.appendChild(f);
       row.append(n, v, t); bars.appendChild(row);
     });
-    $("code").textContent = "ORIGIN · " + p.plain + " · " + r.score + "/100";
-    $("copy").textContent = "Copy my result";
-    $("copyNote").textContent = "Optional: paste it into an Instagram DM. I read every one myself.";
+    const pr = priority(r.score);
+    $("who").textContent = leadName ? leadName + "'s State Report" : "Your State Report";
+    $("rPat").innerHTML = "Pattern: " + p.name;
+    $("rBelief").textContent = p.belief;
+    if (pr === "Hot") {
+      $("rAsk").innerHTML = "Screenshot this and DM it to me " + igLink() + ". I'll reply personally and we'll look at where your pattern started.";
+      $("ctaText").textContent = "Everything learned can be unlearned" + (leadName ? ", " + leadName : "") + ". Screenshot your report above and send it to me in a DM. I read every one myself.";
+    } else {
+      $("rAsk").innerHTML = "I'll message you personally on WhatsApp within 24 hours to look at this with you. Want to talk sooner? Screenshot this and DM it to me " + igLink() + ".";
+      $("ctaText").textContent = "Everything learned can be unlearned" + (leadName ? ", " + leadName : "") + ". I'll message you on WhatsApp within 24 hours to look at your report with you.";
+    }
     show("result");
     $("dot").style.left = "0%";
     requestAnimationFrame(() => requestAnimationFrame(() => { $("dot").style.left = r.score + "%"; }));
@@ -447,10 +521,13 @@ a { color: var(--fg); }
     const lead = {
       name, email, phone, score: r.score, band: r.band.label, pattern: P[r.top].plain,
       scoreboard: r.per.scoreboard, verdict: r.per.verdict, finishline: r.per.finishline, waiting: r.per.waiting,
-      answers: answers.join(","), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
+      answers: answers.join(","),
+      role: about.role, revenue: about.revenue, readiness: about.readiness,
+      belowTarget: $("tHold").value.trim(), tried: $("tTried").value.trim(),
+      priority: priority(r.score), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
     };
     $("fSubmit").disabled = true; $("fSubmit").textContent = "One moment";
-    const go = () => { $("ctaText").textContent = "Everything learned can be unlearned, " + name + ". I'll message you personally on WhatsApp within 24 hours to look at your result with you. Can't wait? Send me your result on Instagram with the word ORIGIN."; $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my result"; finish(); };
+    const go = () => { leadName = name; $("fSubmit").disabled = false; $("fSubmit").textContent = "Show my State Report"; finish(); };
     if (!LEAD_ENDPOINT) { go(); return; }
     let doneOnce = false; const once = () => { if (!doneOnce) { doneOnce = true; go(); } };
     setTimeout(once, 4000);
@@ -461,16 +538,31 @@ a { color: var(--fg); }
 
   $("start").addEventListener("click", () => { i = 0; show("quiz"); renderQ(); });
   $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } });
-  $("restart").addEventListener("click", () => { answers.fill(null); i = 0; show("intro"); $("topRight").textContent = "Free · 2 min"; });
-  $("copy").addEventListener("click", () => {
-    const text = $("code").textContent;
-    const done = () => { $("copy").textContent = "Copied"; $("copyNote").textContent = "Now open Instagram and paste it into a DM to me."; };
-    const fallback = () => {
-      const range = document.createRange(); range.selectNodeContents($("code"));
-      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-      $("copyNote").textContent = "Your result is selected. Copy it, then paste it into a DM to me.";
-    };
-    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  $("restart").addEventListener("click", () => { answers.fill(null); about.role = about.revenue = about.readiness = null; document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel")); i = 0; show("intro"); $("topRight").textContent = "Free · 3 min"; });
+  document.querySelectorAll(".chips").forEach((box) => {
+    const key = box.dataset.key;
+    ABOUT[key].forEach(([v, label]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = label; b.id = "c-" + key + "-" + v;
+      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", "false");
+      b.addEventListener("click", () => {
+        about[key] = v;
+        box.querySelectorAll(".chip").forEach((c) => { c.classList.remove("sel"); c.setAttribute("aria-checked", "false"); });
+        b.classList.add("sel"); b.setAttribute("aria-checked", "true");
+        $("aErr").textContent = "";
+      });
+      box.appendChild(b);
+    });
+  });
+  $("aNext").addEventListener("click", () => {
+    if (!about.role || !about.revenue || !about.readiness) { $("aErr").textContent = "Pick one answer in each row."; return; }
+    show("words");
+  });
+  $("wBack").addEventListener("click", () => show("about"));
+  $("wNext").addEventListener("click", () => {
+    $("tHold").classList.remove("bad");
+    if ($("tHold").value.trim().length < 3) { $("wErr").textContent = "Tell me what happens in you. One honest sentence is enough."; $("tHold").classList.add("bad"); return; }
+    $("wErr").textContent = ""; show("gate");
   });
 })();
 </script>
