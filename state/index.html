@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="A 2-minute index for founders: how much of your state rides on results, and which pattern is running it.">
+<meta name="description" content="A 3-minute index: how much of your state rides on results, and which pattern is running it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://origin-point-seven.vercel.app/state">
 <meta property="og:title" content="The State Index">
@@ -183,6 +183,7 @@ a { color: var(--fg); }
 .field textarea:focus { outline: none; border-color: var(--violet); }
 .field textarea.bad { border-color: var(--terra); }
 .field .hint { font-size: 13px; color: var(--muted); }
+.field label.ask-q { font-family: var(--display); font-weight: 300; font-size: 22px; line-height: 1.25; letter-spacing: 0; text-transform: none; color: var(--fg); }
 .report {
   border: 1px solid var(--line); border-radius: 22px; padding: 22px 20px; display: grid; gap: 14px;
   background: radial-gradient(90% 70% at 100% 0%, rgba(160,139,255,.18), transparent 60%), radial-gradient(80% 60% at 0% 100%, rgba(242,165,107,.12), transparent 60%), var(--bg-2);
@@ -211,12 +212,34 @@ a { color: var(--fg); }
   <section class="screen fade" id="intro">
     <p class="eyebrow">The State Index</p>
     <h1>Who decides <em>how you feel?</em></h1>
-    <p class="lede">You built the business to be free. For a lot of founders, the numbers now decide what kind of day it is. Answer 10 statements and 5 quick questions about where you are, and get your personal State Report: your score, the pattern running it, and where it starts.</p>
+    <p class="lede">For a lot of people, results decide what kind of day it is: the numbers, the score, the grade, the last thing someone said. Tell me what you do, answer 10 statements about your world, and get your personal State Report: your score, the pattern running it, and where it starts.</p>
     <div class="chain" aria-label="Conditioning, then State, then Behaviour, then Results">
       <b>Conditioning</b><span class="arr">→</span><b>State</b><span class="arr">→</span><b>Behaviour</b><span class="arr">→</span><b>Results</b>
     </div>
-    <div class="meta"><span>10 statements + 5 questions</span><span>About 3 minutes</span><span>Answer for the last 3 months</span></div>
+    <div class="meta"><span>2 taps + 10 statements + 2 questions</span><span>About 3 minutes</span><span>Answer for the last 3 months</span></div>
     <button class="btn" id="start" type="button">Get my State Report</button>
+  </section>
+
+  <!-- ROLE -->
+  <section class="screen" id="role" hidden>
+    <div class="progress" aria-hidden="true"><i id="rBar"></i></div>
+    <p class="qnum">First, about you</p>
+    <p class="qtext" id="lRoleQ">What exactly do you do?</p>
+    <p class="lede">So I can adapt the quiz to you.</p>
+    <div class="opts" id="roleOpts" role="radiogroup" aria-labelledby="lRoleQ"></div>
+    <div class="field" id="otherBox" hidden><label for="tOther">Tell me what you do</label><input type="text" id="tOther" maxlength="80" placeholder="e.g. physio, trader, musician"></div>
+    <p class="err" id="roleErr" role="alert"></p>
+    <button class="btn" id="roleNext" type="button" hidden>Next</button>
+    <button class="back" id="roleBack" type="button">← Back</button>
+  </section>
+
+  <!-- NICHE DOWN -->
+  <section class="screen" id="niche" hidden>
+    <div class="progress" aria-hidden="true"><i id="nBar"></i></div>
+    <p class="qnum" id="nEyebrow">About you</p>
+    <p class="qtext" id="nQ"></p>
+    <div class="opts" id="nicheOpts" role="radiogroup" aria-labelledby="nQ"></div>
+    <button class="back" id="nicheBack" type="button">← Back</button>
   </section>
 
   <!-- QUESTION -->
@@ -228,23 +251,13 @@ a { color: var(--fg); }
     <button class="back" id="back" type="button">← Back</button>
   </section>
 
-  <!-- PERSONAL: TAPS -->
-  <section class="screen" id="about" hidden>
-    <p class="eyebrow">Make it personal · 1 of 2</p>
-    <h2>Three quick taps about <em>where you are.</em></h2>
-    <div class="group"><p class="group-label" id="lRole">What do you do?</p><div class="chips" data-key="role" role="radiogroup" aria-labelledby="lRole"></div></div>
-    <div class="group"><p class="group-label" id="lRev">Monthly revenue or income?</p><div class="chips" data-key="revenue" role="radiogroup" aria-labelledby="lRev"></div></div>
-    <div class="group"><p class="group-label" id="lReady">Where are you with this?</p><div class="chips" data-key="readiness" role="radiogroup" aria-labelledby="lReady"></div></div>
-    <p class="err" id="aErr" role="alert"></p>
-    <button class="btn" id="aNext" type="button">Next</button>
-  </section>
-
-  <!-- PERSONAL: TYPED -->
+  <!-- PERSONAL: READINESS + TYPED -->
   <section class="screen" id="words" hidden>
-    <p class="eyebrow">Make it personal · 2 of 2</p>
+    <p class="eyebrow">Make it personal</p>
     <h2>In your <em>own words.</em></h2>
-    <p class="lede">Two questions. This is what makes the report about you. Be honest. Nobody sees it but me.</p>
-    <div class="field"><label for="tHold">What happens in you when a month closes below target?</label><textarea id="tHold" maxlength="600"></textarea></div>
+    <p class="lede">This is what makes the report about you. Be honest. Nobody sees it but me.</p>
+    <div class="group"><p class="group-label" id="lReady">Where are you with this?</p><div class="chips" data-key="readiness" role="radiogroup" aria-labelledby="lReady"></div></div>
+    <div class="field"><label for="tHold" id="lHold" class="ask-q"></label><textarea id="tHold" maxlength="600"></textarea></div>
     <div class="field"><label for="tTried">What have you already tried to fix it?</label><textarea id="tTried" maxlength="600"></textarea><span class="hint">Optional</span></div>
     <p class="err" id="wErr" role="alert"></p>
     <button class="btn" id="wNext" type="button">Next</button>
@@ -316,131 +329,287 @@ a { color: var(--fg); }
 
 <script>
 (function () {
-  // Patterns. Each statement feeds one pattern; q10 feeds the overall score only.
-  const P = {
-    scoreboard: {
-      name: "The <em>Scoreboard</em>",
-      plain: "The Scoreboard",
-      short: "Your numbers set your mood",
-      desc: "Revenue, the bank balance, this week's stats. They don't only tell you how the business is doing. They tell you how you're doing. A good day on the dashboard is a good day in your body. A slow month feels like a smaller you.",
-      belief: "“I am what I produce.”",
-      state: "Calm and confident when the numbers are up. Tight, restless, short with people when they're down.",
-      behaviour: "Checking stats to find out how to feel. Pushing harder in the bad weeks, unable to switch off in the good ones.",
-      results: "Some strong months, and a life that swings with them.",
+  // ---------- Roles: the first tap. Everything after it is worded for that world. ----------
+  // Statement order is fixed so scoring never changes: Scoreboard, Verdict, Finish line, Waiting room (x2), Scoreboard, then the "tried" statement.
+  const PATTERN_ORDER_Q = ["scoreboard", "verdict", "finishline", "waiting", "scoreboard", "verdict", "finishline", "waiting", "scoreboard", null];
+  const INCOME = [["u3", "Under $3k"], ["3-5", "$3k–5k"], ["5-10", "$5k–10k"], ["10+", "$10k+"]];
+  const INCOME_FIT = ["5-10", "10+"];
+
+  const ROLES = {
+    founder: {
+      label: "Founder / business owner",
+      niche: { q: "What's your monthly revenue?", opts: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]], fit: ["10-30", "30-100", "100+"] },
+      w: { scores: "Revenue, the bank balance, this week's stats", area: "the business", good: "A good day on the dashboard", slow: "A slow month", up: "the numbers are up", down: "they're down", check: "the stats", moments: "calls and launches", safe: "softening the price, playing safe with what you put out", doing: "launching", record: "A record month", periods: "months", win: "the number you used to dream about", wired: "The business you built to be free now decides what kind of day you get to have." },
+      q: [
+        "A good revenue day changes my mood more than anything else that happened that day.",
+        "When a client leaves or a deal falls through, it feels like a verdict on me, not just on the deal.",
+        "I hit a goal, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what my next move is, and I still don't make it.",
+        "I check the numbers (sales, bank, stats) to find out how I should feel.",
+        "Criticism of my work stays in my head for days.",
+        "On paper my life looks good, and I still feel like something is missing.",
+        "I tell myself I'll feel ready once I reach a certain number or level.",
+        "In a slow month I feel like a different, smaller version of myself.",
+        "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.",
+      ],
     },
-    verdict: {
-      name: "The <em>Verdict</em>",
-      plain: "The Verdict",
-      short: "Losses feel personal",
-      desc: "When a client leaves, a deal dies or someone criticises the work, it doesn't land as information about the deal. It lands as a judgement about you. It replays for days, and part of you is always bracing for the next one.",
-      belief: "“If they leave, something is wrong with me.”",
-      state: "On edge before calls and launches. A heavy, quiet sting after every no.",
-      behaviour: "Over-delivering, avoiding the hard conversation, softening the price, playing safe with what you put out.",
-      results: "Fewer risks taken, and growth that stays below what you know you're capable of.",
+    sales: {
+      label: "Sales / closer",
+      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      w: { scores: "Your closes, your commission, the leaderboard", area: "the month", good: "A good day on the phones", slow: "A slow month", up: "the closes are coming in", down: "they're not", check: "the leaderboard", moments: "calls", safe: "dropping the price, not asking for the close", doing: "picking up the phone", record: "A record month", periods: "months", win: "the target you used to dream about", wired: "The numbers you chase now decide what kind of day you get to have." },
+      q: [
+        "A good day on the phones changes my mood more than anything else that happened that day.",
+        "When a deal I was sure of falls through, it feels like a verdict on me, not just on the deal.",
+        "I hit my target, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what would move my numbers, and I still don't do it.",
+        "I check the leaderboard or my commission to find out how I should feel.",
+        "A prospect's no or my manager's feedback stays in my head for days.",
+        "On paper I'm doing well, and I still feel like something is missing.",
+        "I tell myself I'll feel confident once I hit a certain number or rank.",
+        "In a slow month I feel like a different, smaller version of myself.",
+        "I've tried routines, motivation or new scripts to feel better. It works for a while, then I'm back where I started.",
+      ],
     },
-    finishline: {
-      name: "The <em>Moving Finish Line</em>",
-      plain: "The Moving Finish Line",
-      short: "Wins don't stay won",
-      desc: "You hit the number you used to dream about, and the feeling is gone within days. On paper it all looks good. Inside, the finish line has already moved, and \"enough\" is always one more level away.",
-      belief: "“I'll be enough when I get there.”",
-      state: "A short high after each win, then a flat, quiet emptiness.",
-      behaviour: "Setting the next target before the last one has landed. Rarely stopping long enough to feel any of it.",
-      results: "A record month that feels empty, and a growing gap between how life looks and how it feels.",
+    athlete: {
+      label: "Athlete",
+      niche: { q: "What level do you compete at?", opts: [["rec", "For fun"], ["club", "Amateur / club"], ["semi", "Semi-pro"], ["pro", "Professional"]], fit: ["semi", "pro"] },
+      w: { scores: "The result, your stats, the coach's selection", area: "your game", good: "A good game", slow: "A bad game", up: "you're playing well", down: "you're not", check: "your stats", moments: "games and trials", safe: "playing not to lose, holding back from the bold play", doing: "committing fully", record: "A big win", periods: "games", win: "the result you used to dream about", wired: "The sport you love now decides what kind of day you get to have." },
+      q: [
+        "A good game or session changes my mood more than anything else that happened that week.",
+        "When I lose, get dropped or make a big mistake, it feels like a verdict on me, not just on that performance.",
+        "I reach a goal (a win, a PB, a selection), and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what I need to do to reach the next level, and I still don't do it consistently.",
+        "I look at my stats, times or rankings to find out how I should feel.",
+        "Criticism from a coach, a teammate or the crowd stays in my head for days.",
+        "From the outside my sport is going well, and I still feel like something is missing.",
+        "I tell myself I'll feel confident once I reach a certain level, result or ranking.",
+        "When I'm playing badly or injured, I feel like a different, smaller version of myself.",
+        "I've tried routines, visualisation or motivation to feel better. It works for a while, then I'm back where I started.",
+      ],
     },
-    waiting: {
-      name: "The <em>Waiting Room</em>",
-      plain: "The Waiting Room",
-      short: "You wait to feel ready",
-      desc: "You know the next move. You could explain it to someone else in a minute. And still it doesn't get made. You tell yourself you'll feel ready after one more number, one more level, one more round of planning.",
-      belief: "“I have to be ready before I'm seen.”",
-      state: "Restless and frustrated with yourself. A low hum of \"I should be further by now\".",
-      behaviour: "Researching, planning and tweaking instead of launching. Starting strong, then pulling back.",
-      results: "Ideas that stay ideas, and a version of you that stays in the waiting room.",
+    student: {
+      label: "Student",
+      niche: { q: "Where are you studying?", opts: [["school", "High school"], ["uni", "University"], ["post", "Postgrad"], ["self", "On my own / a course"]], fit: [] },
+      w: { scores: "Grades, rankings, how you compare to everyone else", area: "school", good: "A good grade", slow: "A bad grade", up: "the grades are good", down: "they're not", check: "your grades", moments: "exams and results day", safe: "not asking the question, picking the safe option", doing: "starting", record: "A top grade", periods: "weeks", win: "the grade you used to dream about", wired: "Your grades now decide what kind of day you get to have." },
+      q: [
+        "A good grade changes my mood more than anything else that happened that week.",
+        "When I fail a test or get rejected, it feels like a verdict on me, not just on that result.",
+        "I reach a goal, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what I should be working on, and I still don't start.",
+        "I compare my grades or progress with other people's to find out how I should feel.",
+        "Criticism from a teacher, a parent or a friend stays in my head for days.",
+        "On paper I'm doing fine, and I still feel like something is missing.",
+        "I tell myself I'll feel ready once I've got the right grade, degree or plan.",
+        "After a bad result I feel like a different, smaller version of myself.",
+        "I've tried study routines, motivation or new systems to feel better. It works for a while, then I'm back where I started.",
+      ],
+    },
+    employed: {
+      label: "Employed",
+      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      w: { scores: "Reviews, your boss's mood, the next promotion", area: "work", good: "A good day at work", slow: "A bad week at work", up: "work is going well", down: "it isn't", check: "how your boss sees you", moments: "reviews and big meetings", safe: "not asking for more, staying quiet in the meeting", doing: "making the move", record: "A promotion", periods: "weeks", win: "the title or salary you used to dream about", wired: "Your job now decides what kind of day you get to have." },
+      q: [
+        "A good day at work changes my mood more than anything else that happened that day.",
+        "When a project goes wrong or my boss is unhappy, it feels like a verdict on me, not just on the work.",
+        "I get the raise, the promotion or the win, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what my next move is (asking for more, changing jobs, starting something), and I still don't make it.",
+        "I watch how my boss or my reviews see me to find out how I should feel.",
+        "Criticism of my work stays in my head for days.",
+        "On paper my life looks good, and I still feel like something is missing.",
+        "I tell myself I'll feel ready once I reach a certain title, salary or level.",
+        "After a bad week at work I feel like a different, smaller version of myself.",
+        "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.",
+      ],
+    },
+    creator: {
+      label: "Creator / freelancer",
+      niche: { q: "What does it bring in a month?", opts: INCOME, fit: INCOME_FIT },
+      w: { scores: "Views, followers, this month's income", area: "your work", good: "A post that lands", slow: "A post that flops", up: "the numbers are up", down: "they're down", check: "the views", moments: "every post and pitch", safe: "undercharging, posting the safe version", doing: "posting", record: "A viral post", periods: "months", win: "the number you used to dream about", wired: "The work you started to be free now decides what kind of day you get to have." },
+      q: [
+        "A post or project that does well changes my mood more than anything else that happened that day.",
+        "When a client leaves, a post flops or someone criticises my work, it feels like a verdict on me, not just on the work.",
+        "I hit a milestone, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what I should be making or sending out, and I still don't do it.",
+        "I check views, followers or income to find out how I should feel.",
+        "A negative comment or bad feedback stays in my head for days.",
+        "On paper my work is going well, and I still feel like something is missing.",
+        "I tell myself I'll feel ready to really put myself out there once I reach a certain number or level.",
+        "In a slow month I feel like a different, smaller version of myself.",
+        "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.",
+      ],
+    },
+    other: {
+      label: "Something else",
+      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      w: { scores: "Money, numbers, progress, what other people think", area: "life", good: "A good day", slow: "A bad week", up: "things go well", down: "they don't", check: "the numbers", moments: "anything that could go wrong", safe: "playing it safe", doing: "acting", record: "A big win", periods: "weeks", win: "the goal you used to dream about", wired: "Results now decide what kind of day you get to have." },
+      q: [
+        "A good result changes my mood more than anything else that happened that day.",
+        "When something I worked for falls through, it feels like a verdict on me, not just on that result.",
+        "I hit a goal, and within days the good feeling is gone and I'm chasing the next one.",
+        "I know exactly what my next move is, and I still don't make it.",
+        "I look at my results (money, numbers, progress) to find out how I should feel.",
+        "Criticism stays in my head for days.",
+        "On paper my life looks good, and I still feel like something is missing.",
+        "I tell myself I'll feel ready once I reach a certain number or level.",
+        "When things aren't going well I feel like a different, smaller version of myself.",
+        "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.",
+      ],
     },
   };
+  const ROLE_ORDER = ["founder", "sales", "athlete", "student", "employed", "creator", "other"];
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-  const Q = [
-    { t: "A good revenue day changes my mood more than anything else that happened that day.", p: "scoreboard" },
-    { t: "When a client leaves or a deal falls through, it feels like a verdict on me, not just on the deal.", p: "verdict" },
-    { t: "I hit a goal, and within days the good feeling is gone and I'm chasing the next one.", p: "finishline" },
-    { t: "I know exactly what my next move is, and I still don't make it.", p: "waiting" },
-    { t: "I check the numbers (sales, bank, stats) to find out how I should feel.", p: "scoreboard" },
-    { t: "Criticism of my work stays in my head for days.", p: "verdict" },
-    { t: "On paper my life looks good, and I still feel like something is missing.", p: "finishline" },
-    { t: "I tell myself I'll feel ready once I reach a certain number or level.", p: "waiting" },
-    { t: "In a slow month I feel like a different, smaller version of myself.", p: "scoreboard" },
-    { t: "I've tried routines, motivation or new strategies to feel better. It works for a while, then I'm back where I started.", p: null },
-  ];
+  // ---------- Patterns. Text is filled in with the role's words (w). ----------
+  const P = {
+    scoreboard: {
+      name: "The <em>Scoreboard</em>", plain: "The Scoreboard", short: "Your numbers set your mood",
+      belief: "“I am what I produce.”",
+      desc: (w) => w.scores + ". They don't only tell you how " + w.area + " is going. They tell you how you're doing. " + w.good + " is a good day in your body. " + w.slow + " feels like a smaller you.",
+      state: (w) => "Calm and confident when " + w.up + ". Tight, restless, short with people when " + w.down + ".",
+      behaviour: (w) => "Checking " + w.check + " to find out how to feel. Pushing harder in the bad " + w.periods + ", unable to switch off in the good ones.",
+      results: () => "Some strong stretches, and a life that swings with them.",
+      ask: "Which number decides what kind of day you have, and what happens in you when it drops?",
+    },
+    verdict: {
+      name: "The <em>Verdict</em>", plain: "The Verdict", short: "Losses feel personal",
+      belief: "“If it goes wrong, something is wrong with me.”",
+      desc: () => "When something goes against you, a no, a loss, someone criticising the work, it doesn't land as information about that moment. It lands as a judgement about you. It replays for days, and part of you is always bracing for the next one.",
+      state: (w) => "On edge before " + w.moments + ". A heavy, quiet sting after every no.",
+      behaviour: (w) => "Over-preparing, avoiding the hard conversation, " + w.safe + ".",
+      results: () => "Fewer risks taken, and a level that stays below what you know you're capable of.",
+      ask: "Think of the last no, loss or criticism that stayed with you. What did it make you think about yourself?",
+    },
+    finishline: {
+      name: "The <em>Moving Finish Line</em>", plain: "The Moving Finish Line", short: "Wins don't stay won",
+      belief: "“I'll be enough when I get there.”",
+      desc: (w) => "You reach " + w.win + ", and the feeling is gone within days. On paper it all looks good. Inside, the finish line has already moved, and \"enough\" is always one more level away.",
+      state: () => "A short high after each win, then a flat, quiet emptiness.",
+      behaviour: () => "Setting the next target before the last one has landed. Rarely stopping long enough to feel any of it.",
+      results: (w) => w.record + " that feels empty, and a growing gap between how life looks and how it feels.",
+      ask: "What's the last big thing you achieved, and how long did the good feeling last?",
+    },
+    waiting: {
+      name: "The <em>Waiting Room</em>", plain: "The Waiting Room", short: "You wait to feel ready",
+      belief: "“I have to be ready before I'm seen.”",
+      desc: () => "You know the next move. You could explain it to someone else in a minute. And still it doesn't get made. You tell yourself you'll feel ready after one more number, one more level, one more round of planning.",
+      state: () => "Restless and frustrated with yourself. A low hum of \"I should be further by now\".",
+      behaviour: (w) => "Researching, planning and tweaking instead of " + w.doing + ". Starting strong, then pulling back.",
+      results: () => "Ideas that stay ideas, and a version of you that stays in the waiting room.",
+      ask: "What's the move you know you should make and haven't made yet? What do you tell yourself?",
+    },
+  };
   const A = ["Never", "Rarely", "Sometimes", "Often", "Almost always"];
 
   const BANDS = [
-    { max: 30, label: "Mostly at cause", text: "Congratulations. That's rare. Results move you, and you come back to yourself quickly. Your state doesn't wait for the numbers. One honest question, though: did you answer for how you actually are, or for how you'd like to be? It's easy to lie to ourselves, and that serves no one. If a few answers were generous, take it again below." },
-    { max: 55, label: "Partly at effect", text: "Most days you're steady, and certain results still reach in and change the whole day. The pattern is there. It just doesn't run every day yet." },
-    { max: 79, label: "Results run you", text: "How the business is doing decides how you feel more often than you do. Good months and bad months feel like two different people." },
-    { max: 100, label: "Fully at effect", text: "Your state is wired to results. The business you built to be free now decides what kind of day you get to have." },
+    { max: 30, label: "Mostly at cause", text: () => "Congratulations. That's rare. Results move you, and you come back to yourself quickly. Your state doesn't wait for the numbers. One honest question, though: did you answer for how you actually are, or for how you'd like to be? It's easy to lie to ourselves, and that serves no one. If a few answers were generous, take it again below." },
+    { max: 55, label: "Partly at effect", text: () => "Most days you're steady, and certain results still reach in and change the whole day. The pattern is there. It just doesn't run every day yet." },
+    { max: 79, label: "Results run you", text: (w) => "How " + w.area + " is going decides how you feel more often than you do. Good " + w.periods + " and bad " + w.periods + " feel like two different people." },
+    { max: 100, label: "Fully at effect", text: (w) => "Your state is wired to results. " + w.wired },
   ];
 
-  // Lead receiver: the Google Apps Script web-app URL. Empty = leads aren't sent anywhere.
   const WA_NUMBER = "35795600875"; // Miro's WhatsApp, digits only with country code
-  const ABOUT = {
-    role: [["founder", "Founder / business owner"], ["closer", "Closer / in sales"], ["employee", "Employed"], ["other", "Something else"]],
-    revenue: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]],
-    readiness: [["curious", "Just curious"], ["understand", "I want to understand it"], ["ready", "I'm ready to change it"]],
-  };
-  const about = { role: null, revenue: null, readiness: null };
+  const READINESS = [["curious", "Just curious"], ["understand", "I want to understand it"], ["ready", "I'm ready to change it"]];
+  // Lead receiver: the Google Apps Script web-app URL. Empty = leads aren't sent anywhere.
   const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLSHld9x9YkRqwvs04W6qxebHwVx138eaBCgfs5FGpK3c0I2hTxK9mUMmPySBgr1DdKg/exec";
 
   const $ = (id) => document.getElementById(id);
-  const answers = new Array(Q.length).fill(null);
-  let i = 0, busy = false;
+  const about = { role: null, other: "", level: null, readiness: null };
+  const answers = new Array(PATTERN_ORDER_Q.length).fill(null);
+  const TOTAL_STEPS = PATTERN_ORDER_Q.length + 2; // role + niche + statements
+  let i = 0, busy = false, leadName = "";
+
+  const R = () => ROLES[about.role] || ROLES.other;
+  const W = () => R().w;
+  const levelLabel = () => { const o = R().niche.opts.find(([v]) => v === about.level); return o ? o[1] : ""; };
+  const roleLabel = () => about.role === "other" && about.other ? "Other: " + about.other : R().label;
 
   function show(id) {
-    ["intro", "quiz", "about", "words", "gate", "result"].forEach((s) => { $(s).hidden = s !== id; });
+    ["intro", "role", "niche", "quiz", "words", "gate", "result"].forEach((s) => { $(s).hidden = s !== id; });
     const el = $(id); el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
     window.scrollTo(0, 0);
   }
 
-  function renderQ() {
-    const q = Q[i];
-    $("qnum").textContent = String(i + 1).padStart(2, "0") + " / " + Q.length;
-    $("qtext").textContent = q.t;
-    $("bar").style.width = (i / Q.length * 100) + "%";
-    $("back").disabled = i === 0;
-    $("topRight").textContent = "Statement " + (i + 1);
-    const opts = $("opts"); opts.innerHTML = "";
-    A.forEach((label, v) => {
+  // Big tappable rows, shared by the role, niche and statement screens.
+  function optRows(box, items, selected, onPick, dots) {
+    box.innerHTML = "";
+    items.forEach(([v, label]) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "opt" + (answers[i] === v ? " sel" : "");
-      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", answers[i] === v ? "true" : "false");
-      b.id = "opt-" + v;
-      const s = document.createElement("span"); s.textContent = label;
-      const d = document.createElement("span"); d.className = "dots";
-      for (let k = 0; k < 4; k++) { const dot = document.createElement("span"); if (k < v) dot.className = "on"; d.appendChild(dot); }
-      b.append(s, d);
-      b.addEventListener("click", () => pick(v, b));
-      opts.appendChild(b);
+      b.type = "button"; b.className = "opt" + (selected === v ? " sel" : "");
+      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", selected === v ? "true" : "false");
+      const s = document.createElement("span"); s.textContent = label; b.appendChild(s);
+      if (dots) {
+        const d = document.createElement("span"); d.className = "dots";
+        for (let k = 0; k < 4; k++) { const dot = document.createElement("span"); if (k < v) dot.className = "on"; d.appendChild(dot); }
+        b.appendChild(d);
+      }
+      b.addEventListener("click", () => {
+        if (busy) return;
+        box.querySelectorAll(".opt").forEach((o) => { o.classList.remove("sel"); o.setAttribute("aria-checked", "false"); });
+        b.classList.add("sel"); b.setAttribute("aria-checked", "true");
+        onPick(v);
+      });
+      box.appendChild(b);
     });
-    const q2 = $("quiz"); q2.classList.remove("fade"); void q2.offsetWidth; q2.classList.add("fade");
+  }
+  const advance = (fn) => { busy = true; setTimeout(() => { busy = false; fn(); }, 260); };
+
+  // Step 1: who are you?
+  function renderRole() {
+    $("rBar").style.width = "0%";
+    $("topRight").textContent = "About you";
+    optRows($("roleOpts"), ROLE_ORDER.map((k) => [k, ROLES[k].label]), about.role, (v) => {
+      const changed = about.role !== v;
+      about.role = v; $("roleErr").textContent = "";
+      if (changed) { about.level = null; answers.fill(null); }
+      const isOther = v === "other";
+      $("otherBox").hidden = !isOther; $("roleNext").hidden = !isOther;
+      if (isOther) { $("tOther").focus(); return; }
+      advance(() => { show("niche"); renderNiche(); });
+    });
+    const isOther = about.role === "other";
+    $("otherBox").hidden = !isOther; $("roleNext").hidden = !isOther;
   }
 
-  function pick(v, el) {
-    if (busy) return;
-    answers[i] = v; busy = true;
-    document.querySelectorAll(".opt").forEach((o) => { o.classList.remove("sel"); o.setAttribute("aria-checked", "false"); });
-    el.classList.add("sel"); el.setAttribute("aria-checked", "true");
-    setTimeout(() => {
-      busy = false;
-      if (i < Q.length - 1) { i++; renderQ(); } else { $("bar").style.width = "100%"; $("topRight").textContent = "Almost there"; show("about"); }
-    }, 260);
+  // Step 2: niche down, depends on the role.
+  function renderNiche() {
+    const n = R().niche;
+    $("nBar").style.width = (1 / TOTAL_STEPS * 100) + "%";
+    $("nEyebrow").textContent = roleLabel();
+    $("nQ").textContent = n.q;
+    optRows($("nicheOpts"), n.opts, about.level, (v) => {
+      about.level = v;
+      advance(() => { i = 0; show("quiz"); renderQ(); });
+    });
+  }
+
+  // Step 3: the 10 statements, worded for the role.
+  function renderQ() {
+    const q = R().q;
+    $("qnum").textContent = String(i + 1).padStart(2, "0") + " / " + q.length;
+    $("qtext").textContent = q[i];
+    $("bar").style.width = ((i + 2) / TOTAL_STEPS * 100) + "%";
+    $("topRight").textContent = "Statement " + (i + 1);
+    optRows($("opts"), A.map((label, v) => [v, label]), answers[i], (v) => {
+      answers[i] = v;
+      advance(() => {
+        if (i < q.length - 1) { i++; renderQ(); }
+        else { $("bar").style.width = "100%"; $("topRight").textContent = "Almost there"; renderWords(); show("words"); }
+      });
+    }, true);
+    const el = $("quiz"); el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+  }
+
+  // Step 4: the typed question adapts to their strongest pattern.
+  function renderWords() {
+    $("lHold").textContent = P[compute().top].ask;
   }
 
   function compute() {
     const total = answers.reduce((s, v) => s + (v || 0), 0);
-    const score = Math.round(total / (Q.length * 4) * 100);
+    const score = Math.round(total / (answers.length * 4) * 100);
     const per = {};
     Object.keys(P).forEach((k) => {
-      const idx = Q.map((q, n) => q.p === k ? n : -1).filter((n) => n >= 0);
+      const idx = PATTERN_ORDER_Q.map((p, n) => p === k ? n : -1).filter((n) => n >= 0);
       const sum = idx.reduce((s, n) => s + (answers[n] || 0), 0);
       per[k] = Math.round(sum / (idx.length * 4) * 100);
     });
@@ -450,27 +619,27 @@ a { color: var(--fg); }
     return { score, per, top, band, order };
   }
 
+  // Hot = can invest (role-specific) + ready + score 50+. Students are never Hot.
   function priority(score) {
-    const qualified = (about.role === "founder" || about.role === "closer") && ["10-30", "30-100", "100+"].includes(about.revenue);
-    if (qualified && about.readiness === "ready" && score >= 50) return "Hot";
+    const fit = R().niche.fit.includes(about.level);
+    if (fit && about.readiness === "ready" && score >= 50) return "Hot";
     if (about.readiness !== "curious" && score >= 31) return "Warm";
     return "Cool";
   }
   function waLink(text) {
     return '<a href="https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text) + '" target="_blank" rel="noopener">on WhatsApp</a>';
   }
-  let leadName = "";
 
   function finish() {
-    const r = compute(); const p = P[r.top];
+    const r = compute(); const p = P[r.top]; const w = W();
     $("topRight").textContent = "Result";
     $("score").textContent = r.score;
     $("band").textContent = r.band.label;
-    $("bandText").textContent = r.band.text;
+    $("bandText").textContent = r.band.text(w);
     $("pName").innerHTML = p.name;
-    $("pDesc").textContent = p.desc;
+    $("pDesc").textContent = p.desc(w);
     const csbr = $("csbr"); csbr.innerHTML = "";
-    [["Conditioning", p.belief], ["State", p.state], ["Behaviour", p.behaviour], ["Results", p.results]].forEach(([k, v]) => {
+    [["Conditioning", p.belief], ["State", p.state(w)], ["Behaviour", p.behaviour(w)], ["Results", p.results(w)]].forEach(([k, v]) => {
       const row = document.createElement("div");
       const dt = document.createElement("dt"); dt.textContent = k;
       const dd = document.createElement("dd"); dd.textContent = v;
@@ -525,8 +694,8 @@ a { color: var(--fg); }
       name, email, phone, score: r.score, band: r.band.label, pattern: P[r.top].plain,
       scoreboard: r.per.scoreboard, verdict: r.per.verdict, finishline: r.per.finishline, waiting: r.per.waiting,
       answers: answers.join(","),
-      role: about.role, revenue: about.revenue, readiness: about.readiness,
-      belowTarget: $("tHold").value.trim(), tried: $("tTried").value.trim(),
+      role: roleLabel(), level: levelLabel(), revenue: levelLabel(), readiness: about.readiness,
+      question: P[r.top].ask, belowTarget: $("tHold").value.trim(), tried: $("tTried").value.trim(),
       priority: priority(r.score), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
     };
     $("fSubmit").disabled = true; $("fSubmit").textContent = "One moment";
@@ -539,32 +708,40 @@ a { color: var(--fg); }
     } catch (err) { once(); }
   });
 
-  $("start").addEventListener("click", () => { i = 0; show("quiz"); renderQ(); });
-  $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } });
-  $("restart").addEventListener("click", () => { answers.fill(null); about.role = about.revenue = about.readiness = null; document.querySelectorAll(".chip").forEach((c) => c.classList.remove("sel")); i = 0; show("intro"); $("topRight").textContent = "Free · 3 min"; });
+  $("start").addEventListener("click", () => { show("role"); renderRole(); });
+  $("roleBack").addEventListener("click", () => { show("intro"); $("topRight").textContent = "Free · 3 min"; });
+  $("roleNext").addEventListener("click", () => {
+    about.other = $("tOther").value.trim();
+    if (about.other.length < 2) { $("roleErr").textContent = "Tell me in a word or two what you do."; return; }
+    $("roleErr").textContent = ""; show("niche"); renderNiche();
+  });
+  $("tOther").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("roleNext").click(); } });
+  $("nicheBack").addEventListener("click", () => { show("role"); renderRole(); });
+  $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } else { show("niche"); renderNiche(); } });
+  $("restart").addEventListener("click", () => {
+    answers.fill(null); about.role = about.level = about.readiness = null; about.other = ""; $("tOther").value = "";
+    document.querySelectorAll(".chip").forEach((c) => { c.classList.remove("sel"); c.setAttribute("aria-checked", "false"); });
+    i = 0; show("intro"); $("topRight").textContent = "Free · 3 min";
+  });
   document.querySelectorAll(".chips").forEach((box) => {
-    const key = box.dataset.key;
-    ABOUT[key].forEach(([v, label]) => {
+    READINESS.forEach(([v, label]) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.textContent = label; b.id = "c-" + key + "-" + v;
+      b.type = "button"; b.className = "chip"; b.textContent = label; b.id = "c-readiness-" + v;
       b.setAttribute("role", "radio"); b.setAttribute("aria-checked", "false");
       b.addEventListener("click", () => {
-        about[key] = v;
+        about.readiness = v;
         box.querySelectorAll(".chip").forEach((c) => { c.classList.remove("sel"); c.setAttribute("aria-checked", "false"); });
         b.classList.add("sel"); b.setAttribute("aria-checked", "true");
-        $("aErr").textContent = "";
+        $("wErr").textContent = "";
       });
       box.appendChild(b);
     });
   });
-  $("aNext").addEventListener("click", () => {
-    if (!about.role || !about.revenue || !about.readiness) { $("aErr").textContent = "Pick one answer in each row."; return; }
-    show("words");
-  });
-  $("wBack").addEventListener("click", () => show("about"));
+  $("wBack").addEventListener("click", () => { i = answers.length - 1; show("quiz"); renderQ(); });
   $("wNext").addEventListener("click", () => {
     $("tHold").classList.remove("bad");
-    if ($("tHold").value.trim().length < 3) { $("wErr").textContent = "Tell me what happens in you. One honest sentence is enough."; $("tHold").classList.add("bad"); return; }
+    if (!about.readiness) { $("wErr").textContent = "Pick where you are with this."; return; }
+    if ($("tHold").value.trim().length < 3) { $("wErr").textContent = "Answer in your own words. One honest sentence is enough."; $("tHold").classList.add("bad"); return; }
     $("wErr").textContent = ""; show("gate");
   });
 })();
