@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "state(.*)\\.theoriginpoint\\.business" }],
+      "has": [{ "type": "host", "value": "state(.*)\\.theoriginpoint\\.biz" }],
       "destination": "/state/index.html"
     }
   ],
@@ -10,7 +10,7 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "origin-point-seven.vercel.app" }],
-      "destination": "https://explore.theoriginpoint.business/:path*",
+      "destination": "https://explore.theoriginpoint.biz/:path*",
       "permanent": false
     }
   ]
