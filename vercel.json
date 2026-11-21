@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "state(.*)\\.theoriginpoint\\.business" }],
+      "destination": "/state/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "origin-point-seven.vercel.app" }],
+      "destination": "https://explore.theoriginpoint.business/:path*",
+      "permanent": false
+    }
+  ]
+}
