@@ -1,25 +1,15 @@
 {
   "redirects": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "state(.*)\\.theoriginpoint\\.biz"
-        }
-      ],
-      "destination": "/state",
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "state(.*)\\.theoriginpoint\\.biz" }],
+      "destination": "https://top.theoriginpoint.biz/state",
       "permanent": false
     },
     {
       "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "origin-point-seven.vercel.app"
-        }
-      ],
-      "destination": "https://explore.theoriginpoint.biz/:path*",
+      "has": [{ "type": "host", "value": "(explore\\.theoriginpoint\\.biz|origin-point-seven\\.vercel\\.app|theoriginpoint\\.vercel\\.app)" }],
+      "destination": "https://top.theoriginpoint.biz/:path*",
       "permanent": false
     }
   ]
