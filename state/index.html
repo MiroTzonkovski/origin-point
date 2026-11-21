@@ -256,6 +256,7 @@ a { color: var(--fg); }
     <p class="eyebrow">Make it personal</p>
     <h2>In your <em>own words.</em></h2>
     <p class="lede">This is what makes the report about you. Be honest. Nobody sees it but me.</p>
+    <div class="group" id="moneyGroup"><p class="group-label" id="lMoney"></p><div class="chips" id="moneyChips" role="radiogroup" aria-labelledby="lMoney"></div></div>
     <div class="group"><p class="group-label" id="lReady">Where are you with this?</p><div class="chips" data-key="readiness" role="radiogroup" aria-labelledby="lReady"></div></div>
     <div class="field"><label for="tHold" id="lHold" class="ask-q"></label><textarea id="tHold" maxlength="600"></textarea></div>
     <div class="field"><label for="tTried">What have you already tried to fix it?</label><textarea id="tTried" maxlength="600"></textarea><span class="hint">Optional</span></div>
@@ -334,11 +335,14 @@ a { color: var(--fg); }
   const PATTERN_ORDER_Q = ["scoreboard", "verdict", "finishline", "waiting", "scoreboard", "verdict", "finishline", "waiting", "scoreboard", null];
   const INCOME = [["u3", "Under $3k"], ["3-5", "$3k–5k"], ["5-10", "$5k–10k"], ["10+", "$10k+"]];
   const INCOME_FIT = ["5-10", "10+"];
+  const INCOME_Q = { q: "Roughly, what do you earn a month?", opts: INCOME, fit: INCOME_FIT };
+  const NO_SAY = ["skip", "Rather not say"];
 
   const ROLES = {
     founder: {
       label: "Founder / business owner",
-      niche: { q: "What's your monthly revenue?", opts: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]], fit: ["10-30", "30-100", "100+"] },
+      niche: { q: "What kind of business?", opts: [["agency", "Agency / services"], ["coaching", "Coaching / consulting"], ["ecom", "E-commerce / products"], ["tech", "Software / tech"], ["local", "Local business"], ["other", "Something else"]] },
+      money: { q: "Roughly, what's your monthly revenue?", opts: [["u5", "Under $5k"], ["5-10", "$5k–10k"], ["10-30", "$10k–30k"], ["30-100", "$30k–100k"], ["100+", "$100k+"]], fit: ["10-30", "30-100", "100+"] },
       w: { scores: "Revenue, the bank balance, this week's stats", area: "the business", good: "A good day on the dashboard", slow: "A slow month", up: "the numbers are up", down: "they're down", check: "the stats", moments: "calls and launches", safe: "softening the price, playing safe with what you put out", doing: "launching", record: "A record month", periods: "months", win: "the number you used to dream about", wired: "The business you built to be free now decides what kind of day you get to have." },
       q: [
         "A good revenue day changes my mood more than anything else that happened that day.",
@@ -355,7 +359,8 @@ a { color: var(--fg); }
     },
     sales: {
       label: "Sales / closer",
-      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      niche: { q: "What kind of sales?", opts: [["closer", "High-ticket closer"], ["setter", "Setter / SDR"], ["b2b", "B2B / account exec"], ["inperson", "In person / retail"], ["other", "Something else"]] },
+      money: INCOME_Q,
       w: { scores: "Your closes, your commission, the leaderboard", area: "the month", good: "A good day on the phones", slow: "A slow month", up: "the closes are coming in", down: "they're not", check: "the leaderboard", moments: "calls", safe: "dropping the price, not asking for the close", doing: "picking up the phone", record: "A record month", periods: "months", win: "the target you used to dream about", wired: "The numbers you chase now decide what kind of day you get to have." },
       q: [
         "A good day on the phones changes my mood more than anything else that happened that day.",
@@ -373,6 +378,7 @@ a { color: var(--fg); }
     athlete: {
       label: "Athlete",
       niche: { q: "What level do you compete at?", opts: [["rec", "For fun"], ["club", "Amateur / club"], ["semi", "Semi-pro"], ["pro", "Professional"]], fit: ["semi", "pro"] },
+      money: null,
       w: { scores: "The result, your stats, the coach's selection", area: "your game", good: "A good game", slow: "A bad game", up: "you're playing well", down: "you're not", check: "your stats", moments: "games and trials", safe: "playing not to lose, holding back from the bold play", doing: "committing fully", record: "A big win", periods: "games", win: "the result you used to dream about", wired: "The sport you love now decides what kind of day you get to have." },
       q: [
         "A good game or session changes my mood more than anything else that happened that week.",
@@ -389,7 +395,8 @@ a { color: var(--fg); }
     },
     student: {
       label: "Student",
-      niche: { q: "Where are you studying?", opts: [["school", "High school"], ["uni", "University"], ["post", "Postgrad"], ["self", "On my own / a course"]], fit: [] },
+      niche: { q: "Where are you studying?", opts: [["school", "High school"], ["uni", "University"], ["post", "Postgrad"], ["self", "On my own / a course"]], },
+      money: null,
       w: { scores: "Grades, rankings, how you compare to everyone else", area: "school", good: "A good grade", slow: "A bad grade", up: "the grades are good", down: "they're not", check: "your grades", moments: "exams and results day", safe: "not asking the question, picking the safe option", doing: "starting", record: "A top grade", periods: "weeks", win: "the grade you used to dream about", wired: "Your grades now decide what kind of day you get to have." },
       q: [
         "A good grade changes my mood more than anything else that happened that week.",
@@ -406,7 +413,8 @@ a { color: var(--fg); }
     },
     employed: {
       label: "Employed",
-      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      niche: { q: "What kind of work?", opts: [["office", "Office / corporate"], ["tech", "Tech"], ["health", "Healthcare"], ["trades", "Trades / hands-on"], ["creative", "Creative"], ["other", "Something else"]] },
+      money: INCOME_Q,
       w: { scores: "Reviews, your boss's mood, the next promotion", area: "work", good: "A good day at work", slow: "A bad week at work", up: "work is going well", down: "it isn't", check: "how your boss sees you", moments: "reviews and big meetings", safe: "not asking for more, staying quiet in the meeting", doing: "making the move", record: "A promotion", periods: "weeks", win: "the title or salary you used to dream about", wired: "Your job now decides what kind of day you get to have." },
       q: [
         "A good day at work changes my mood more than anything else that happened that day.",
@@ -423,7 +431,8 @@ a { color: var(--fg); }
     },
     creator: {
       label: "Creator / freelancer",
-      niche: { q: "What does it bring in a month?", opts: INCOME, fit: INCOME_FIT },
+      niche: { q: "What do you create?", opts: [["content", "Content / social media"], ["design", "Design"], ["video", "Video / photo"], ["writing", "Writing"], ["music", "Music / art"], ["other", "Something else"]] },
+      money: { q: "Roughly, what does it bring in a month?", opts: INCOME, fit: INCOME_FIT },
       w: { scores: "Views, followers, this month's income", area: "your work", good: "A post that lands", slow: "A post that flops", up: "the numbers are up", down: "they're down", check: "the views", moments: "every post and pitch", safe: "undercharging, posting the safe version", doing: "posting", record: "A viral post", periods: "months", win: "the number you used to dream about", wired: "The work you started to be free now decides what kind of day you get to have." },
       q: [
         "A post or project that does well changes my mood more than anything else that happened that day.",
@@ -440,7 +449,8 @@ a { color: var(--fg); }
     },
     other: {
       label: "Something else",
-      niche: { q: "What do you earn a month?", opts: INCOME, fit: INCOME_FIT },
+      niche: null,
+      money: INCOME_Q,
       w: { scores: "Money, numbers, progress, what other people think", area: "life", good: "A good day", slow: "A bad week", up: "things go well", down: "they don't", check: "the numbers", moments: "anything that could go wrong", safe: "playing it safe", doing: "acting", record: "A big win", periods: "weeks", win: "the goal you used to dream about", wired: "Results now decide what kind of day you get to have." },
       q: [
         "A good result changes my mood more than anything else that happened that day.",
@@ -513,14 +523,15 @@ a { color: var(--fg); }
   const LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLSHld9x9YkRqwvs04W6qxebHwVx138eaBCgfs5FGpK3c0I2hTxK9mUMmPySBgr1DdKg/exec";
 
   const $ = (id) => document.getElementById(id);
-  const about = { role: null, other: "", level: null, readiness: null };
+  const about = { role: null, other: "", level: null, money: null, readiness: null };
   const answers = new Array(PATTERN_ORDER_Q.length).fill(null);
   const TOTAL_STEPS = PATTERN_ORDER_Q.length + 2; // role + niche + statements
   let i = 0, busy = false, leadName = "";
 
   const R = () => ROLES[about.role] || ROLES.other;
   const W = () => R().w;
-  const levelLabel = () => { const o = R().niche.opts.find(([v]) => v === about.level); return o ? o[1] : ""; };
+  const levelLabel = () => { const o = R().niche && R().niche.opts.find(([v]) => v === about.level); return o ? o[1] : ""; };
+  const moneyLabel = () => { const m = R().money; const o = m && m.opts.concat([NO_SAY]).find(([v]) => v === about.money); return o ? o[1] : ""; };
   const roleLabel = () => about.role === "other" && about.other ? "Other: " + about.other : R().label;
 
   function show(id) {
@@ -560,7 +571,7 @@ a { color: var(--fg); }
     optRows($("roleOpts"), ROLE_ORDER.map((k) => [k, ROLES[k].label]), about.role, (v) => {
       const changed = about.role !== v;
       about.role = v; $("roleErr").textContent = "";
-      if (changed) { about.level = null; answers.fill(null); }
+      if (changed) { about.level = about.money = null; answers.fill(null); }
       const isOther = v === "other";
       $("otherBox").hidden = !isOther; $("roleNext").hidden = !isOther;
       if (isOther) { $("tOther").focus(); return; }
@@ -602,6 +613,21 @@ a { color: var(--fg); }
   // Step 4: the typed question adapts to their strongest pattern.
   function renderWords() {
     $("lHold").textContent = P[compute().top].ask;
+    const m = R().money; $("moneyGroup").hidden = !m;
+    if (!m) return;
+    $("lMoney").textContent = m.q;
+    const box = $("moneyChips"); box.innerHTML = "";
+    m.opts.concat([NO_SAY]).forEach(([v, label]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chip" + (about.money === v ? " sel" : ""); b.textContent = label;
+      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", about.money === v ? "true" : "false");
+      b.addEventListener("click", () => {
+        about.money = v;
+        box.querySelectorAll(".chip").forEach((c) => { c.classList.remove("sel"); c.setAttribute("aria-checked", "false"); });
+        b.classList.add("sel"); b.setAttribute("aria-checked", "true"); $("wErr").textContent = "";
+      });
+      box.appendChild(b);
+    });
   }
 
   function compute() {
@@ -621,7 +647,7 @@ a { color: var(--fg); }
 
   // Hot = can invest (role-specific) + ready + score 50+. Students are never Hot.
   function priority(score) {
-    const fit = R().niche.fit.includes(about.level);
+    const r = R(); const fit = r.money ? r.money.fit.includes(about.money) : !!(r.niche && r.niche.fit && r.niche.fit.includes(about.level));
     if (fit && about.readiness === "ready" && score >= 50) return "Hot";
     if (about.readiness !== "curious" && score >= 31) return "Warm";
     return "Cool";
@@ -694,7 +720,7 @@ a { color: var(--fg); }
       name, email, phone, score: r.score, band: r.band.label, pattern: P[r.top].plain,
       scoreboard: r.per.scoreboard, verdict: r.per.verdict, finishline: r.per.finishline, waiting: r.per.waiting,
       answers: answers.join(","),
-      role: roleLabel(), level: levelLabel(), revenue: levelLabel(), readiness: about.readiness,
+      role: roleLabel(), level: levelLabel(), revenue: moneyLabel(), readiness: about.readiness,
       question: P[r.top].ask, belowTarget: $("tHold").value.trim(), tried: $("tTried").value.trim(),
       priority: priority(r.score), source: params.get("src") || params.get("utm_source") || "", page: location.href.split("#")[0]
     };
@@ -713,17 +739,17 @@ a { color: var(--fg); }
   $("roleNext").addEventListener("click", () => {
     about.other = $("tOther").value.trim();
     if (about.other.length < 2) { $("roleErr").textContent = "Tell me in a word or two what you do."; return; }
-    $("roleErr").textContent = ""; show("niche"); renderNiche();
+    $("roleErr").textContent = ""; i = 0; show("quiz"); renderQ();
   });
   $("tOther").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("roleNext").click(); } });
   $("nicheBack").addEventListener("click", () => { show("role"); renderRole(); });
-  $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } else { show("niche"); renderNiche(); } });
+  $("back").addEventListener("click", () => { if (i > 0) { i--; renderQ(); } else if (R().niche) { show("niche"); renderNiche(); } else { show("role"); renderRole(); } });
   $("restart").addEventListener("click", () => {
-    answers.fill(null); about.role = about.level = about.readiness = null; about.other = ""; $("tOther").value = "";
+    answers.fill(null); about.role = about.level = about.money = about.readiness = null; about.other = ""; $("tOther").value = "";
     document.querySelectorAll(".chip").forEach((c) => { c.classList.remove("sel"); c.setAttribute("aria-checked", "false"); });
     i = 0; show("intro"); $("topRight").textContent = "Free · 3 min";
   });
-  document.querySelectorAll(".chips").forEach((box) => {
+  document.querySelectorAll(".chips[data-key=readiness]").forEach((box) => {
     READINESS.forEach(([v, label]) => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "chip"; b.textContent = label; b.id = "c-readiness-" + v;
@@ -740,6 +766,7 @@ a { color: var(--fg); }
   $("wBack").addEventListener("click", () => { i = answers.length - 1; show("quiz"); renderQ(); });
   $("wNext").addEventListener("click", () => {
     $("tHold").classList.remove("bad");
+    if (R().money && !about.money) { $("wErr").textContent = "Pick one answer for the income question. \"Rather not say\" is fine."; return; }
     if (!about.readiness) { $("wErr").textContent = "Pick where you are with this."; return; }
     if ($("tHold").value.trim().length < 3) { $("wErr").textContent = "Answer in your own words. One honest sentence is enough."; $("tHold").classList.add("bad"); return; }
     $("wErr").textContent = ""; show("gate");
